@@ -1,0 +1,33 @@
+<div class="relative py-16 bg-white overflow-hidden">
+  <div class="relative px-4 sm:px-6 lg:px-8">
+    <div class="mb-4 lg:fixed">
+      <a class="bg-gray-50 px-2 py-1 rounded text-gray-700 hover:bg-gray-100" load="/blog">
+        <i class="fal fa-angle-left"></i> <span class="font-medium ml-2">Blog</span>
+      </a>
+    </div>
+
+    <div class="container m-auto">
+      <div class="text-center" if.bind="!error">
+        <figure class="h-24 m-auto mb-4 text-center w-24">
+          <img class="rounded-full" src="${author.avatar}" />
+        </figure>
+        <p>
+          <span class="text-2xl">${author.name}</span> <br />
+          <span>
+            ${author.twitter} &middot;
+            <a external load="${author.website}">${author.website}</a>
+          </span>
+        </p>
+
+        <p class="p-8" innerhtml.bind="author.authorDescription"></p>
+      </div>
+      <div>
+        <author-posts user-posts.bind="authorPosts"></author-posts>
+        <pagination current-page.bind="currentPage" pages.bind="pages" load-to.bind="location"></pagination>
+      </div>
+      <div class="font-medium text-center" if.bind="error">
+        <p>The author could not be found.</p>
+      </div>
+    </div>
+  </div>
+</div>

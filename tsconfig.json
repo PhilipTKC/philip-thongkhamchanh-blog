@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "baseUrl": "src",
+    "emitDecoratorMetadata": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "paths": {
+      "src": [
+        "src/*"
+      ]
+    },
+    "resolveJsonModule": true,
+    "rootDir": "src",
+    "skipLibCheck": true,
+    "target": "ES2017"
+  },
+  "files": [
+    "src/resource.d.ts"
+  ],
+  "include": [
+    "src"
+  ]
+}

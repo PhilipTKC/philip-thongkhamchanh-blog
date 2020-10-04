@@ -1,0 +1,119 @@
+/*
+  An Old Hope – Star Wars Syntax (c) Gustavo Costa <gusbemacbe@gmail.com>
+  Original theme - Ocean Dark Theme – by https://github.com/gavsiu
+  Based on Jesse Leite's Atom syntax theme 'An Old Hope' – https://github.com/JesseLeite/an-old-hope-syntax-atom
+*/
+
+/* purgecss start ignore */
+.hljs-comment,
+.hljs-quote {
+  color: #b6b18b;
+}
+
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+  color: #eb3c54;
+}
+
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+  color: #e7ce56;
+}
+
+.hljs-attribute {
+  color: #ee7c2b;
+}
+
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+  color: #4fb4d7;
+}
+
+.hljs-title,
+.hljs-section {
+  color: #78bb65;
+}
+
+.hljs-keyword,
+.hljs-selector-tag {
+  color: #b45ea4;
+}
+
+.hljs {
+  @apply block;
+  @apply mb-4;
+  @apply mt-4;
+  @apply overflow-x-auto;
+  @apply p-2;
+  @apply shadow-md;
+  @apply text-gray-200;
+  background: #1c1d21;
+}
+
+.hljs-emphasis {
+  @apply italic;
+}
+
+.hljs-strong {
+  @apply font-bold;
+}
+
+/* Extended */
+.prose code::before {
+  content: "";
+}
+
+.prose code::after {
+  content: "";
+}
+
+.prose code {
+  @apply bg-gray-700;
+  @apply font-medium;
+  @apply leading-tight;
+  @apply px-2;
+  @apply py-2.5;
+  @apply rounded;
+  @apply text-white;
+}
+
+.tag {
+  @apply font-hairline;
+  @apply py-2;
+  @apply px-2;
+  @apply rounded;
+  @apply text-gray-50;
+  @apply text-xs;
+  @apply uppercase;
+  @apply w-auto;
+  background-color: #1c1d21;
+}
+
+.label {
+  @apply tag;
+  @apply bg-indigo-700;
+  @apply cursor-pointer;
+  @apply font-medium;
+  @apply mr-2;
+  @apply opacity-50;
+}
+
+.label:hover {
+  @apply opacity-100;
+}
+
+/* purgecss end ignore */
