@@ -47,7 +47,7 @@ export class PostService {
   async retrieveData(entry: PostData | string): Promise<PostData> {
     try {
       if (typeof entry === "string") {
-        const data = await import(`content/posts_data/${entry}.json`).then(({ default: _ }) => _);
+        const data = await import(`content/posts-data/${entry}.json`).then(({ default: _ }) => _);
         return data;
       }
     } catch (_) {

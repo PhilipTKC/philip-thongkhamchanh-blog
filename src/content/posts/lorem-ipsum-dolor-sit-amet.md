@@ -1,5 +1,5 @@
 ---
-authorId: PhilipTKC
+author: PhilipTKC
 title: Lorem ipsum dolor sit amet, consectetur adipiscing elit
 date: 2020-09-24T09:12:17.504Z
 summary: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec egestas pulvinar sapien quis mattis. Cras molestie vitae augue sit amet eleifend. Aenean fringilla pulvinar dui et vestibulum. Maecenas ornare risus et risus scelerisque, ac iaculis sem blandit. Morbi sollicitudin aliquet porttitor.

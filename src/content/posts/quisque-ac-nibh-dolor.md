@@ -1,5 +1,5 @@
 ---
-authorId: PhilipTKC
+author: PhilipTKC
 title: Quisque ac nibh dolor.
 date: 2020-09-28
 summary: Quisque ac nibh dolor. Sed ipsum est, pharetra sit amet condimentum sed, efficitur vel metus. Mauris ut fermentum odio.

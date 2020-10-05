@@ -1,20 +1,20 @@
 [
   {
+    "author": "PhilipTKC",
     "authorDescription": "Just a person...",
-    "authorId": "PhilipTKC",
     "avatar": "https://avatars3.githubusercontent.com/u/67127178?s=460&u=279665932cd5386ba0ff04fed7a599d1b7607439&v=4",
     "email": "philip@thongkhamchanh.me",
     "name": "Philip Thongkhamchanh",
     "twitter": "@PhilipTKC",
     "website": "https://github.com/PhilipTKC"
   },
-    {
-      "authorDescription": "Just a <s>robot</s> person...",
-      "authorId": "NotARobot",
-      "avatar": "https://robohash.org/John%20Does",
-      "email": "real@human",
-      "name": "R2-D2",
-      "twitter": "@R2-D2",
-      "website": "localhost"
-    }
+  {
+    "author": "NotARobot",
+    "authorDescription": "Just a <s>robot</s> person...",
+    "avatar": "https://robohash.org/John%20Does",
+    "email": "real@human",
+    "name": "R2-D2",
+    "twitter": "@R2-D2",
+    "website": "localhost"
+  }
 ]

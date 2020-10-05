@@ -1,4 +1,4 @@
-import { Contributor, AuthorService, PostService, Post as IPost } from "services";
+import { Author, AuthorService, PostService, Post as IPost } from "services";
 import { inject, IRouter, IViewModel } from "aurelia";
 import { TraverseData } from "components/traverse";
 
@@ -11,7 +11,7 @@ type Parameters = {
 export class Post implements IViewModel {
   static title = (instance: Post): string => (instance.post ? instance.post.attributes.title : "Blog Post Not Found");
 
-  private author: Contributor;
+  private author: Author;
 
   private post: IPost;
 
@@ -24,7 +24,7 @@ export class Post implements IViewModel {
     const post = await this.posts.retrievePost(parameters.id);
 
     if (post && postData) {
-      this.author = await this.authorService.retrieveContributor(post.attributes.authorId);
+      this.author = await this.authorService.retrieveAuthor(post.attributes.author);
       this.post = post;
       this.traverseData = {
         nextTitle: postData.nextTitle,

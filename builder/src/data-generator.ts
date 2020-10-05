@@ -1,12 +1,9 @@
 import fm from "front-matter";
-import rimraf from "rimraf";
 import fs from "fs";
 
 import {
   contributorDataPath,
-  dataPath,
   paginationDataPath,
-  PostData,
   postsDataPath,
   postsPath,
   readFile,
@@ -16,9 +13,9 @@ import {
 } from "./common";
 
 import { postsPerPage } from "../../src/blog.config.json";
-import authors from "../../src/content/contributors/contributors.json";
+import authors from "../../src/content/authors/authors.json";
 
-type FileMetaData = {
+type FileDataAttributes = {
   date: Date;
   file: string;
   key: string;
@@ -28,291 +25,342 @@ type FileMetaData = {
   slug: string;
 };
 
-type Attributes = {
-  authorId: string;
-  avatar: string;
+type YAMLHeaders = {
+  author: string;
   category: string;
   date: Date;
   length: number;
-  name: string;
+  published: boolean;
   summary: string;
   title: string;
 };
 
-type Concatenation = {
-  concatEnd: PostData;
-  concatNext: PostData;
-  concatStart: PostData;
+type FullHeaders = {
+  avatar: string;
+  id: string;
+  key: string;
+  name: string;
+} & YAMLHeaders;
+
+type Result = {
+  attributes: YAMLHeaders;
+  body: string;
+  bodyBegin: number;
+  frontmatter: string;
 };
 
-type ContributorList = { [x: string]: any[] }[];
+type AuthorPost = { [author: string]: YAMLHeaders[] | [] };
 
-const foldersToClean = [`${contributorDataPath}/**/*`, `${postsDataPath}/**/*.*`, `${paginationDataPath}/**/*.*`, `${dataPath}/**/*.*`];
+type AuthorPostsList = AuthorPost[];
+
+type Traverse = {
+  date: Date;
+  id?: string;
+  nextKey?: string;
+  nextPost?: string;
+  nextTitle?: string;
+  previousKey?: string;
+  previousPost?: string;
+  previousTitle?: string;
+  title?: string;
+};
+
+type Concatenation = {
+  end: Traverse;
+  next: Traverse;
+  start: Traverse;
+};
 
 function generateData(): void {
-  for (const folder of foldersToClean) {
-    rimraf.sync(folder);
-  }
-
-  const fileData: FileMetaData[] = retrieveBlogPostFromFolder();
+  const fileData: FileDataAttributes[] = retrieveBlogPostFromFolder();
   writeBlogPostData(fileData);
 }
 
-function addPostToContributor(
-  contributorsList: ContributorList,
-  currentFileData: Attributes,
-  currentAttributes: { date?: Date; id?: string; key: any }
-): void {
-  const authorId = currentFileData.authorId;
-  const author = contributorsList.find((x) => x[authorId]);
+/*
+ ** Retrieve all markdown posts from content path
+ ** Returns map of all posts sorted by 'date' YAML header
+ ** TODO: Refactor
+ */
+function retrieveBlogPostFromFolder(): FileDataAttributes[] {
+  return fs
+    .readdirSync(postsPath)
+    .map((fileNameWithExt: string) => {
+      if (/\.(md)$/.test(fileNameWithExt)) {
+        /*
+         ** TODO
+         ** Validate filename / rename file
+         */
 
-  if (author) {
-    author[authorId].push({ ...currentAttributes, title: currentFileData.title, category: currentFileData.category });
-  } else {
-    console.log(`Ensure "${currentAttributes.key}.md" contains an invalid author (Must match any authorId in Contributor.json)`);
-  }
+        const filePath = `${postsPath}/${fileNameWithExt}`;
+        const { attributes, isValid } = hasRequiredAttributes(filePath);
+
+        if (!isValid) {
+          return;
+        }
+
+        let fileNameWithoutExt: string;
+        let extractedName: string;
+        const { newFilePath, draft } = SetPublishedState(attributes, fileNameWithExt, filePath);
+
+        if (draft) {
+          return;
+        }
+
+        if (newFilePath) {
+          extractedName = newFilePath.split("/").pop();
+          fileNameWithoutExt = extractedName.substring(0, extractedName.indexOf("."));
+        } else {
+          fileNameWithoutExt = fileNameWithExt.substring(0, fileNameWithExt.indexOf("."));
+        }
+
+        return {
+          date: attributes.date,
+          file: fileNameWithoutExt,
+          key: fileNameWithoutExt,
+          path: newFilePath ? newFilePath : filePath,
+          postDataPath: `${postsDataPath}/${fileNameWithoutExt}.json`,
+          published: attributes.published,
+          slug: fileNameWithoutExt,
+        };
+      }
+
+      return;
+    })
+    .filter(Boolean)
+    .sort((a, b) => {
+      const aTime = a.date.getTime();
+      const bTime = b.date.getTime();
+      return bTime - aTime;
+    });
 }
 
-function writeBlogPostData(fileData: FileMetaData[]): void {
-  if (fileData.length === 0) {
-    // Write an empty entry file.
+/*
+ ** Determine whether blog post has the required attributes.
+ */
+function hasRequiredAttributes(filePath: string) {
+  const frontMatter = fm(readFile(filePath)) as Result;
+
+  const requiredKeys = ["author", "category", "date", "published", "summary", "title"];
+
+  let isValid: boolean;
+  Object.keys(frontMatter.attributes).forEach((key) => {
+    const hasKey = requiredKeys.includes(key);
+    if (!hasKey) {
+      isValid = false;
+    } else {
+      isValid = true;
+    }
+  });
+
+  if (!isValid) {
+    console.log(`Please check the YAML header on the following file \n${filePath}`);
+  }
+
+  return { attributes: frontMatter.attributes, isValid };
+}
+
+function SetPublishedState(attributes: any, post, filePath: string) {
+  let newFilePath: string;
+
+  // Rename to unpublished state and skip file
+  if (!attributes.published && post.charAt(0) !== "_") {
+    newFilePath = `${postsPath}/_${post}`;
+    fs.rename(filePath, newFilePath, (err) => {
+      if (err) {
+        console.log(err);
+      }
+    });
+
+    return { newFilePath, draft: true };
+  }
+
+  // Rename back to published state.
+  if (attributes.published && post.charAt(0) === "_") {
+    newFilePath = `${postsPath}/${post.substring(1)}`;
+    fs.rename(`${postsPath}/${post}`, newFilePath, (err) => {
+      if (err) {
+        console.log(err);
+      }
+    });
+  }
+
+  return { newFilePath, draft: false };
+}
+
+function writeBlogPostData(fileDataArr: FileDataAttributes[]): void {
+  /*
+   ** Create an empty JSON file.
+   */
+  if (fileDataArr.length === 0) {
     return writePositionFile("entry");
   }
 
-  let postsInPage: PostData[] = [];
+  let traverseArr: Traverse[] = [];
   let pageNumber = 1;
-  let remainingPosts = fileData.length - 1;
+  let remainingPosts = fileDataArr.length - 1;
 
-  const contributorsList: ContributorList = retrieveContributors();
+  const authorList: AuthorPostsList = retrieveAuthors();
 
-  fileData.forEach((fileMetaData: FileMetaData, index: number) => {
-    const { previousFileAttributes, nextFileAttributes, currentAttributes, currentFileData } = readBlogPost(fileMetaData, fileData, index);
+  fileDataArr.forEach((file: FileDataAttributes, index: number) => {
+    const { previousFileAttributes, attributes, nextFileAttributes } = readBlogPost(file, fileDataArr, index);
 
-    addPostToContributor(contributorsList, currentFileData, currentAttributes);
+    addPostToAuthor(authorList, attributes);
 
-    const { concatStart, concatNext, concatEnd } = setMetaData(
-      currentAttributes,
-      previousFileAttributes,
-      nextFileAttributes,
-      index,
-      fileData
-    );
+    const { start, next, end } = setTraverseData(attributes, previousFileAttributes, nextFileAttributes, index, fileDataArr);
 
-    const postData = index === 0 ? concatStart : index === fileData.length - 1 ? concatEnd : concatNext;
+    const post = index === 0 ? start : index === fileDataArr.length - 1 ? end : next;
 
-    postsInPage.push(postData);
+    traverseArr.push(post);
 
     if (index === 0) {
-      writePositionFile("entry", postData);
+      writePositionFile("entry", post);
     }
 
-    if (index === fileData.length - 1) {
-      writePositionFile("tail", postData);
+    if (index === fileDataArr.length - 1) {
+      writePositionFile("tail", post);
     }
 
     /*
      ** postPerPage is greater than the amount of blog post that exist
      ** Write all blog post to single page.
      */
-    if (postsPerPage > fileData.length && index === fileData.length - 1) {
-      writePaginationFile(pageNumber, postsInPage);
+    if (postsPerPage > fileDataArr.length && index === fileDataArr.length - 1) {
+      writePaginationFile(pageNumber, traverseArr);
     }
 
     /*
      ** Push x amount of blog post determined by postPerPage and write to current pageNumber.
      */
-    if (postsInPage.length >= postsPerPage && remainingPosts !== 0) {
-      writePaginationFile(pageNumber, postsInPage);
+    if (traverseArr.length >= postsPerPage && remainingPosts !== 0) {
+      writePaginationFile(pageNumber, traverseArr);
       pageNumber += 1;
-      postsInPage = [];
+      traverseArr = [];
     }
 
     /*
      ** Write remaining blog post to file.
      */
     if (remainingPosts === 0) {
-      writePaginationFile(pageNumber, postsInPage);
+      writePaginationFile(pageNumber, traverseArr);
 
       // Write amount of pages to pages.json (Used to determine pages for pagination component)
       fs.writeFileSync(`${paginationDataPath}/pages.json`, JSON.stringify(Object.assign({}, { pages: pageNumber })));
     }
 
-    fs.writeFileSync(`${postsDataPath}/${fileMetaData.key}.json`, JSON.stringify(Object.assign({}, postData)));
+    fs.writeFileSync(`${postsDataPath}/${file.key}.json`, JSON.stringify(Object.assign({}, post)));
 
     remainingPosts -= 1;
   });
 
-  saveContributorPosts(contributorsList);
+  saveAuthorPosts(authorList);
+}
+
+function addPostToAuthor(authorPostList: AuthorPostsList, attributes: FullHeaders): void {
+  const authorName = attributes.author;
+  const author: AuthorPost = authorPostList.find((x) => x[authorName]);
+
+  if (authorName) {
+    (author[authorName] as YAMLHeaders[]).push({ ...attributes, title: attributes.title, category: attributes.category });
+  } else {
+    console.log(`Ensure "${attributes.key}.md" contains an invalid author (Must match any author in authors.json)`);
+  }
 }
 
 /*
  ** TODO: Refactor
- ** Ensure that contributors.json contains unique authorId for each entry
+ ** Ensure that authors.json contains unique author for each entry
  */
-function retrieveContributors(): ContributorList {
+function retrieveAuthors(): AuthorPost[] {
   return authors.map((contributor) => {
-    return { [contributor.authorId]: [] };
+    return { [contributor.author]: [] };
   });
 }
 
-function saveContributorPosts(contributorsList: any[]): void {
-  contributorsList.forEach((contributorPostData: any, index: string | number) => {
-    const authorId = Object.keys(contributorsList[index])[0];
-    const chunks = chunk(contributorsList[index][authorId], 10);
+function saveAuthorPosts(authorList: AuthorPostsList): void {
+  for (let index = 0; index < authorList.length; index += 1) {
+    const author: string = Object.keys(authorList[index])[0];
 
-    chunks.forEach((chunk, index) => {
-      fs.writeFileSync(`${contributorDataPath}/${authorId}-${index + 1}.json`, JSON.stringify(chunk));
+    /*
+     ** chunkSize === 0 returns YAMLHeaders[]
+     ** chunkSize > 0 returns YAMLHeaders[][]
+     */
+    const chunks = chunk(authorList[index][author], 10);
+
+    (chunks as YAMLHeaders[][]).forEach((chunk: YAMLHeaders[], index: number) => {
+      fs.writeFileSync(`${contributorDataPath}/${author}-${index + 1}.json`, JSON.stringify(chunk));
     });
 
     fs.writeFileSync(
-      `${contributorDataPath}/${authorId}.json`,
+      `${contributorDataPath}/${author}.json`,
       JSON.stringify({
         pages: chunks.length,
       })
     );
-  });
+  }
 }
 
 /*
  ** https://gist.github.com/dragonza/c9642c85854305586ab5578e0f4d9493
  */
-function chunk(array: any[], size: number): any[][] {
-  if (!array) return [];
-  const firstChunk = array.slice(0, size);
+function chunk(authorArr: YAMLHeaders[], size: number): YAMLHeaders[] | YAMLHeaders[][] {
+  if (!authorArr) return [];
+
+  const firstChunk = authorArr.slice(0, size);
   if (!firstChunk.length) {
-    return array;
+    return authorArr;
   }
-  return [firstChunk].concat(chunk(array.slice(size, array.length), size));
-}
 
-/*
- ** Retrieve all markdown posts from content path (Folder that holds all .md files)
- ** Returns map of all posts sorted by 'birthTime'.
- */
-function retrieveBlogPostFromFolder(): FileMetaData[] {
-  return fs
-    .readdirSync(postsPath)
-    .map((post) => {
-      if (/\.(md)$/.test(post)) {
-        const filePath = `${postsPath}/${post}`;
-        const fileName = post.substring(0, post.indexOf("."));
-        const slug = post.replace(".md", "").replace(/\s/g, "-");
-        const attributes = fm(readFile(filePath)).attributes as any;
-
-        let newFilePath: string;
-
-        // Rename to unpublished state and skip file
-        if (!attributes.published && post.charAt(0) !== "_") {
-          newFilePath = `${postsPath}/_${post}`;
-          fs.rename(filePath, newFilePath, (err) => {
-            if (err) {
-              console.log(err);
-            }
-          });
-          return;
-        }
-
-        // Rename back to published state.
-        if (attributes.published && post.charAt(0) === "_") {
-          newFilePath = `${postsPath}/${post.substring(1)}`;
-          fs.rename(`${postsPath}/${post}`, newFilePath, (err) => {
-            if (err) {
-              console.log(err);
-            }
-          });
-        }
-
-        return {
-          date: attributes.date,
-          file: post,
-          path: newFilePath ? newFilePath : filePath,
-          postDataPath: `${postsDataPath}/${fileName}.json`,
-          published: attributes.published,
-          slug,
-          key: fileName,
-        };
-      }
-      return;
-    })
-    .filter(Boolean)
-    .sort((a, b) => {
-      return b.date - a.date;
-    });
+  return [firstChunk].concat(chunk(authorArr.slice(size, authorArr.length), size));
 }
 
 /*
  ** Reads the content of the current file including the previous and next if available
  */
-function readBlogPost(fileMeta: FileMetaData, metaDataArr: FileMetaData[], index: number) {
-  if (fileMeta !== undefined) {
-    let currentFileData: Attributes;
+function readBlogPost(file: FileDataAttributes, fileArr: FileDataAttributes[], index: number) {
+  if (file !== undefined) {
+    let currentFileData: YAMLHeaders;
 
     try {
-      const doc = fm(readFile(fileMeta.path));
-      currentFileData = { ...(doc.attributes as any), length: doc.body.length };
+      const doc = fm(readFile(file.path)) as Result;
+      currentFileData = { ...doc.attributes, length: doc.body.length };
     } catch (e) {
       console.log(e);
     }
 
-    let previousFileAttributes: Attributes;
-    if (index > 0 && index <= metaDataArr.length - 1) {
+    let previousFileAttributes: YAMLHeaders;
+    if (index > 0 && index <= fileArr.length - 1) {
       try {
-        const doc = fm(readFile(metaDataArr[index - 1].path));
-        previousFileAttributes = doc.attributes as any;
+        const doc = fm(readFile(fileArr[index - 1].path)) as Result;
+        previousFileAttributes = doc.attributes;
       } catch (e) {
         console.log(e);
       }
     }
 
-    let nextFileAttributes: Attributes;
-    if (index >= 0 && index < metaDataArr.length - 1) {
+    let nextFileAttributes: YAMLHeaders;
+    if (index >= 0 && index < fileArr.length - 1) {
       try {
-        const doc = fm(readFile(metaDataArr[index + 1].path));
-        nextFileAttributes = doc.attributes as any;
+        const doc = fm(readFile(fileArr[index + 1].path)) as Result;
+        nextFileAttributes = doc.attributes;
       } catch (e) {
         console.log(e);
       }
     }
 
     const slugDate = toSlugDate(currentFileData.date);
+    const authorObj = authors.find((x) => x.author === currentFileData.author);
 
-    const author = authors.find((x) => x.authorId === currentFileData.authorId);
-
-    const currentAttributes = {
-      author: currentFileData.authorId,
-      avatar: author.avatar,
-      date: currentFileData.date,
-      id: `${slugDate}/${fileMeta.slug.toLowerCase()}`,
-      key: fileMeta.key,
-      length: currentFileData.length,
-      published: fileMeta.published,
-      name: author.name,
-      summary: currentFileData.summary,
-      title: currentFileData.title,
+    const attributes: FullHeaders = {
+      ...currentFileData,
+      avatar: authorObj.avatar,
+      id: `${slugDate}/${file.slug.toLowerCase()}`,
+      key: file.key,
+      name: authorObj.name,
+      published: file.published,
     };
 
-    return { previousFileAttributes, nextFileAttributes, currentAttributes, currentFileData };
+    return { previousFileAttributes, attributes, nextFileAttributes };
   }
-}
-
-/*
- ** Determine whether blog post has the required attributes.
- */
-function isValidBlogPost(filePath: string): boolean {
-  const file = readFile(filePath);
-  return hasRequiredAttributes(file);
-}
-
-function hasRequiredAttributes(filePath: string): boolean {
-  const attributes: Attributes = fm(readFile(filePath)) as any;
-
-  const requiredKeys = ["authorId", "category", "date", "published", "summary", "title"];
-
-  const isValid = requiredKeys.every((item) => {
-    return Object.prototype.hasOwnProperty.call(attributes, item);
-  });
-
-  return isValid;
 }
 
 /*
@@ -321,67 +369,61 @@ function hasRequiredAttributes(filePath: string): boolean {
  ** Meta data is saved in a separate folder ('_data') in json format.
  ** Filename is exactly the same as the blog post name in ('_posts')
  */
-function setMetaData(
-  currentAttributes: PostData,
-  previousFileAttributes: PostData,
-  nextFileAttributes: PostData,
-  index: number,
-  content: FileMetaData[]
-): Concatenation {
-  let concatStart: PostData;
+function setTraverseData(start: Traverse, previous: Traverse, next: Traverse, index: number, FileArr: FileDataAttributes[]): Concatenation {
+  let concatStart: Traverse;
 
   if (index === 0) {
     concatStart = {
-      ...currentAttributes,
+      ...start,
     };
 
-    if (content.length > 1) {
-      const nextSlugDate = toSlugDate(nextFileAttributes.date);
+    if (FileArr.length > 1) {
+      const nextSlugDate = toSlugDate(next.date);
       concatStart = {
-        ...currentAttributes,
-        nextKey: content[index + 1].key,
-        nextPost: `${nextSlugDate}/${content[index + 1].slug.toLowerCase()}`,
-        nextTitle: nextFileAttributes.title,
+        ...start,
+        nextKey: FileArr[index + 1].key,
+        nextPost: `${nextSlugDate}/${FileArr[index + 1].slug.toLowerCase()}`,
+        nextTitle: next.title,
       };
     }
   }
 
-  let concatPrevious: PostData;
+  let concatPrevious: Traverse;
 
-  if (index > 0 && previousFileAttributes) {
-    const previousSlugDate = toSlugDate(previousFileAttributes.date);
+  if (index > 0 && previous) {
+    const previousSlugDate = toSlugDate(previous.date);
 
     concatPrevious = {
-      ...currentAttributes,
-      previousKey: content[index - 1].key,
-      previousPost: `${previousSlugDate}/${content[index - 1].slug}`,
-      previousTitle: previousFileAttributes.title,
+      ...start,
+      previousKey: FileArr[index - 1].key,
+      previousPost: `${previousSlugDate}/${FileArr[index - 1].slug}`,
+      previousTitle: previous.title,
     };
   }
 
-  let concatNext: PostData;
-  if (index > 0 && index < content.length - 1 && nextFileAttributes) {
-    const nextSlugDate = toSlugDate(nextFileAttributes.date);
+  let concatNext: Traverse;
+  if (index > 0 && index < FileArr.length - 1 && next) {
+    const nextSlugDate = toSlugDate(next.date);
     concatNext = {
       ...concatPrevious,
-      nextPost: `${nextSlugDate}/${content[index + 1].slug}`,
-      nextTitle: nextFileAttributes.title,
-      nextKey: content[index + 1].key,
+      nextPost: `${nextSlugDate}/${FileArr[index + 1].slug}`,
+      nextTitle: next.title,
+      nextKey: FileArr[index + 1].key,
     };
   }
 
-  let concatEnd: PostData;
-  if (index === content.length - 1 && content.length > 1) {
-    const previousSlugDate = toSlugDate(previousFileAttributes.date);
+  let concatEnd: Traverse;
+  if (index === FileArr.length - 1 && FileArr.length > 1) {
+    const previousSlugDate = toSlugDate(previous.date);
     concatEnd = {
-      ...currentAttributes,
-      previousPost: `${previousSlugDate}/${content[index - 1].slug}`,
-      previousTitle: previousFileAttributes.title,
-      previousKey: content[index - 1].key,
+      ...start,
+      previousPost: `${previousSlugDate}/${FileArr[index - 1].slug}`,
+      previousTitle: previous.title,
+      previousKey: FileArr[index - 1].key,
     };
   }
 
-  return { concatStart, concatNext, concatEnd };
+  return { start: concatStart, next: concatNext, end: concatEnd };
 }
 
-export { generateData, isValidBlogPost };
+export { generateData, Traverse };

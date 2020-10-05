@@ -11,8 +11,8 @@ export class App implements IViewModel {
     { path: "blog", instructions: [{ component: "blog" }] },
     { path: "blog/:page", instructions: [{ component: "blog" }] },
     { path: "blog/:date/:id", instructions: [{ component: "post" }] },
-    { path: "author/:authorId", instructions: [{ component: "author" }] },
-    { path: "author/:authorId/:page", instructions: [{ component: "author" }] },
+    { path: "author/:author", instructions: [{ component: "author" }] },
+    { path: "author/:author/:page", instructions: [{ component: "author" }] },
   ];
 
   constructor(@IRouter private router: IRouter) {}
