@@ -18,7 +18,13 @@ const cssLoader = "css-loader";
 const postcssLoader = {
   loader: "postcss-loader",
   options: {
-    plugins: () => [require("tailwindcss"), require("autoprefixer")()],
+    plugins: () => [
+      require("tailwindcss"),
+      require("autoprefixer")(),
+      require("cssnano")({
+        preset: "advanced",
+      }),
+    ],
   },
 };
 

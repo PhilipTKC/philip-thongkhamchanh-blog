@@ -53,6 +53,16 @@ type AuthorPost = { [author: string]: YAMLHeaders[] | [] };
 
 type AuthorPostsList = AuthorPost[];
 
+type Author = {
+  author: string;
+  authorDescription: string;
+  avatar: string;
+  email: string;
+  name: string;
+  twitter: string;
+  website: string;
+};
+
 type Traverse = {
   date: Date;
   id?: string;
@@ -347,7 +357,7 @@ function readBlogPost(file: FileDataAttributes, fileArr: FileDataAttributes[], i
     }
 
     const slugDate = toSlugDate(currentFileData.date);
-    const authorObj = authors.find((x) => x.author === currentFileData.author);
+    const authorObj: Author = authors.find((x: Author) => x.author === currentFileData.author);
 
     const attributes: FullHeaders = {
       ...currentFileData,
