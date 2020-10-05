@@ -1,6 +1,6 @@
 import { bindable } from "aurelia";
 
-export type TraverseData = {
+export type ITraverse = {
   nextTitle?: string;
   nextId?: string;
   previousTitle?: string;
@@ -8,5 +8,5 @@ export type TraverseData = {
 };
 
 export class Traverse {
-  @bindable traverseData: TraverseData;
+  @bindable traverse: ITraverse;
 }

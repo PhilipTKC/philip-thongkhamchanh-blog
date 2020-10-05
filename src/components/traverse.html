@@ -1,15 +1,15 @@
 <div>
   <div class="flex-1 font-black justify-between m-auto">
     <div class="m-2 px-4 py-2 text-center">
-      <a class="cursor-pointer" load="/blog/${traverseData.previousId}" if.bind="traverseData.previousId">
-        <span class="bg-blue-50 px-2 py-1 text-xs text-gray-500 rounded"><i class="far fa-arrow-to-left"></i> NEWER</span>
-        <span>${traverseData.previousTitle}</span>
+      <a class="cursor-pointer" load="/blog/${traverse.previousId}" if.bind="traverse.previousId">
+        <span class="bg-blue-50 inline-block mr-2 px-2 py-1 text-xs text-gray-500 rounded"><i class="far fa-arrow-to-left"></i> NEWER</span>
+        <span>${traverse.previousTitle}</span>
       </a>
     </div>
     <div class="m-2 px-4 py-2 text-center">
-      <a class="cursor-pointer" load="/blog/${traverseData.nextId}" if.bind="traverseData.nextId">
-        <span>${traverseData.nextTitle}</span>
-        <span class="bg-red-50 px-1 py-1 text-xs text-gray-500 rounded">OLDER <i class="far fa-arrow-to-right"></i></span>
+      <a class="cursor-pointer" load="/blog/${traverse.nextId}" if.bind="traverse.nextId">
+        <span>${traverse.nextTitle}</span>
+        <span class="bg-red-50 inline-block ml-2 px-1 py-1 text-xs text-gray-500 rounded">OLDER <i class="far fa-arrow-to-right"></i></span>
       </a>
     </div>
   </div>

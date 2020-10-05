@@ -1,10 +1,15 @@
-import { Author, AuthorService, PostService, Post as IPost } from "services";
+import { Author, AuthorService, PostService, Attributes } from "services";
 import { inject, IRouter, IViewModel } from "aurelia";
-import { TraverseData } from "components/traverse";
+import { ITraverse } from "components/traverse";
 
 type Parameters = {
   date: string;
   id: string;
+};
+
+type IPost = {
+  attributes: Attributes;
+  html: string;
 };
 
 @inject(AuthorService, PostService)
@@ -15,7 +20,7 @@ export class Post implements IViewModel {
 
   private post: IPost;
 
-  private traverseData: TraverseData;
+  private traverse: ITraverse;
 
   constructor(private readonly authorService: AuthorService, private readonly posts: PostService, @IRouter private router: IRouter) {}
 
@@ -26,7 +31,7 @@ export class Post implements IViewModel {
     if (post && postData) {
       this.author = await this.authorService.retrieveAuthor(post.attributes.author);
       this.post = post;
-      this.traverseData = {
+      this.traverse = {
         nextTitle: postData.nextTitle,
         nextId: postData.nextPost,
         previousTitle: postData.previousTitle,

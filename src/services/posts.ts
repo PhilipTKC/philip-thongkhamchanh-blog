@@ -10,17 +10,12 @@ type PostData = {
   previousTitle?: string;
 };
 
-type Attributes = {
+export type Attributes = {
   authorId: string;
   category: string;
   title: string;
   date: Date;
   summary: string;
-};
-
-export type Post = {
-  attributes: Attributes;
-  html: string;
 };
 
 export class PostService {
