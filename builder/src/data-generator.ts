@@ -142,13 +142,12 @@ function hasRequiredAttributes(filePath: string) {
 
   const requiredKeys = ["author", "category", "date", "published", "summary", "title"];
 
-  let isValid: boolean;
+  let isValid = true;
   Object.keys(frontMatter.attributes).forEach((key) => {
     const hasKey = requiredKeys.includes(key);
     if (!hasKey) {
       isValid = false;
-    } else {
-      isValid = true;
+      return;
     }
   });
 
