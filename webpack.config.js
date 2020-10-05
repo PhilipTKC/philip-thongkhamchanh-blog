@@ -22,7 +22,7 @@ const postcssLoader = {
       require("tailwindcss"),
       require("autoprefixer")(),
       require("cssnano")({
-        preset: "basic",
+        preset: "default",
       }),
     ],
   },
