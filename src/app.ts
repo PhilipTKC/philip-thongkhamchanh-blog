@@ -30,7 +30,7 @@ export class App implements IViewModel {
 
     this.router.addHook(
       async (instructions: ViewportInstruction[]) => {
-        if (instructions.length > 0) {
+        if (instructions.length > 0 && typeof instructions === "object") {
           const instruct = instructions[0];
           const componentInstance = instruct.componentInstance;
           const componentType = instruct.componentType;
@@ -42,6 +42,10 @@ export class App implements IViewModel {
             if (componentType.title !== undefined) {
               const staticTitle = componentType.title(componentInstance, instruct);
               return `${staticTitle} | ${this.appName}`;
+            }
+
+            if (instruct.route && instruct.route.match.title) {
+              return instruct.route.match.title;
             }
 
             return this.appName;

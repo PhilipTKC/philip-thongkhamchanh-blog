@@ -66,7 +66,7 @@
   "name": "philip-thongkhamchanh-blog",
   "repository": {
     "type": "git",
-    "url": "???"
+    "url": "https://github.com/PhilipTKC/philip-thongkhamchanh-blog"
   },
   "scripts": {
     "analyze": "rimraf dist && webpack --env production --analyze",

@@ -25,7 +25,7 @@ Aliquam vitae tempus eros. Praesent ac aliquam ipsum, vitae venenatis elit. Cura
 ## Installation
 
 ::: md:flex
-::: flex-1 w-1/2 w-full
+::: w-1/2 w-full mr-1
 
 ### Aurelia
 
@@ -34,7 +34,7 @@ Aliquam vitae tempus eros. Praesent ac aliquam ipsum, vitae venenatis elit. Cura
 `au new`
 
 :::
-::: flex-1 w-1/2 w-full
+::: w-1/2 w-full ml-1
 
 ### Aurelia 2
 

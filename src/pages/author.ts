@@ -37,8 +37,6 @@ export class Author implements IViewModel {
       this.authorPosts = authorPosts;
       this.pages = authorData.pages;
       this.location = `/author/${this.author.author}`;
-
-      console.log(this.author);
     } else {
       this.error = true;
     }
