@@ -21,7 +21,8 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        sans: ["'Noto Sans TC', sans-serif", ...defaultTheme.fontFamily.sans],
+        sans: ["Roboto", ...defaultTheme.fontFamily.sans],
+        serif: ["'Noto Sans TC'", ...defaultTheme.fontFamily.serif],
       },
     },
   },
