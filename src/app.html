@@ -3,4 +3,16 @@
 <import from="./pages/missing"></import>
 <import from="./pages/post"></import>
 
-<au-viewport name="main" default="blog" fallback="missing"></au-viewport>
+<div>
+  <div class="absolute lg:fixed p-2 mt-12 right-0 text-xl top-0">
+    <div class="cursor-pointer ${isDark ? 'text-white' : ''}">
+      <span if.bind="isDark" click.delegate="removeDarkTheme()" class="text-yellow-200 hover:text-gray-500">
+        <i class="fal fa-eclipse"></i>
+      </span>
+      <span if.bind="!isDark" click.delegate="loadDarkTheme()" class="text-gray-500 hover:text-yellow-300">
+        <i class="fal fa-sun"></i>
+      </span>
+    </div>
+  </div>
+  <au-viewport name="main" default="blog" fallback="missing"></au-viewport>
+</div>
