@@ -59,7 +59,7 @@ Build script replaces spaces in file paths/names data with hyphens for consisten
 
 ### Edit Blog Post
 
-You can edit markdown content however if you edit the frontmatter you should run the build command afterwards.
+Run build script once you're done editing to update data made to the YAML headers or content.
 
 # Blog Builder
 

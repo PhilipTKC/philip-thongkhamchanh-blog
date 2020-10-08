@@ -15,7 +15,7 @@ import {
 import { postsPerPage } from "../../src/blog.config.json";
 import authors from "../../src/content/authors/authors.json";
 
-type FileDataAttributes = {
+interface FileDataAttributes {
   date: Date;
   file: string;
   key: string;
@@ -25,7 +25,7 @@ type FileDataAttributes = {
   slug: string;
 };
 
-type YAMLHeaders = {
+interface YAMLHeaders {
   author: string;
   category: string;
   date: Date;
@@ -33,27 +33,28 @@ type YAMLHeaders = {
   published: boolean;
   summary: string;
   title: string;
+  isTemplate?: boolean;
 };
 
-type FullHeaders = {
+interface FullHeaders extends YAMLHeaders {
   avatar: string;
   id: string;
   key: string;
   name: string;
-} & YAMLHeaders;
+}
 
-type Result = {
+interface Result {
   attributes: YAMLHeaders;
   body: string;
   bodyBegin: number;
   frontmatter: string;
 };
 
-type AuthorPost = { [author: string]: YAMLHeaders[] | [] };
+interface AuthorPost { [author: string]: YAMLHeaders[] | [] };
 
 type AuthorPostsList = AuthorPost[];
 
-type Author = {
+interface Author {
   author: string;
   authorDescription: string;
   avatar: string;
@@ -63,7 +64,7 @@ type Author = {
   website: string;
 };
 
-type Traverse = {
+interface Traverse {
   date: Date;
   id?: string;
   nextKey?: string;
@@ -75,7 +76,7 @@ type Traverse = {
   title?: string;
 };
 
-type Concatenation = {
+interface Concatenation {
   end: Traverse;
   next: Traverse;
   start: Traverse;
@@ -149,23 +150,26 @@ function retrieveBlogPostFromFolder(): FileDataAttributes[] {
  */
 function hasRequiredAttributes(filePath: string) {
   const frontMatter = fm(readFile(filePath)) as Result;
+  const attributes = frontMatter.attributes;
 
   const requiredKeys = ["author", "category", "date", "published", "summary", "title"];
 
   let isValid = true;
-  Object.keys(frontMatter.attributes).forEach((key) => {
+  Object.keys(attributes).forEach((key) => {
+    const value = attributes[key];
+
     const hasKey = requiredKeys.includes(key);
-    if (!hasKey) {
+    if (!hasKey || value === null) {
       isValid = false;
       return;
     }
   });
 
-  if (!isValid) {
+  if (!isValid && !attributes.isTemplate) {
     console.log(`Please check the YAML header on the following file \n${filePath}`);
   }
 
-  return { attributes: frontMatter.attributes, isValid };
+  return { attributes, isValid };
 }
 
 function SetPublishedState(attributes: any, post, filePath: string) {
