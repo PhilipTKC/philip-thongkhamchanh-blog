@@ -1,40 +1,36 @@
 ---
 author: PhilipTKC
-title: Dual Monitor Setup in Deepin v20
+title: Dual Monitor Setup in Deepin v20 (Issue)
 date: 2020-12-19T00:00:00.001Z
-summary: After my initial thoughts of Deepin v20 on release, I was rather disapointed and reverted back to 15.11. After several patches and updates. Deepin v20 is now my daily driver. It's far from perfect, however, It's undeniably beautiful. I digress.
+summary: I have two monitors at two different resolutions. They are vertically centered on a single monitor stand.
 category: DeepinLinux
 published: true
 ---
 
-After my initial thoughts of Deepin v20 on release, I was rather disapointed and reverted back to 15.11. 
-
-After several patches and updates. Deepin v20 is now my daily driver. It's undeniably beautiful. I digress.
-
-Back to the issue.
+## The Issue
 
 I have two monitors at two different resolutions. They are vertically centered on a single monitor stand.
 
 1. 1920x1080
 2. 3440x1440
 
-In this case I'd like to place monitor 1 in the top center of monitor 2 and that's where my problem started. Monitor 1 would snap either to the top left or right and that was not ideal.
+In this case I want to place monitor 1 on the top center of monitor 2, however Monitor 1 would snap either to the top left or right.
 
 ::: flex justify-center
-![Dual Monitor Setup](./assets/images/screen-displays-01.png)
+![Dual Monitor Setup](./assets/images/screen-display-01.png)
 :::
 
-Fortunately, I found ARandR, and all my problems vanished.
-
-::: flex justify-center
-![Dual Monitor Setup](./assets/images/screen-displays-02.png)
-:::
+Fortunately, I found ARandR, and hoped all my problems would vanish...
 
 Unfortunately that wasn't the case and while ARandR addresses the issue with monitor placement it does not address the DPI differences between monitors.
 
-## Applying on Startup
+## The Solution
 
-Create a file in ~/.config/autostart called `monitors.desktop` with the following content
+ARandR does not apply the configuration on startup, fortunately we're able to execute shell scripts on load.
+
+### Applying on Startup
+
+Create a file in ~/.config/autostart called `monitors.desktop` with the following content.
 
 Replace `Exec="path/to/script"`
 

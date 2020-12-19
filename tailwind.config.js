@@ -7,18 +7,9 @@ module.exports = {
     content: ["./src/**/*.html", "./src/**/*.ts", "./src/**/*.md"],
   },
   theme: {
-    fontWeight: {
-      hairline: 100,
-      light: 300,
-      normal: 400,
-      medium: 500,
-      bold: 700,
-      black: 900,
-    },
     extend: {
       fontFamily: {
-        sans: ["Roboto", ...defaultTheme.fontFamily.sans],
-        serif: ["'Noto Sans TC'", ...defaultTheme.fontFamily.serif],
+        sans: ["Inter", "Roboto", ...defaultTheme.fontFamily.sans],
       },
     },
   },
