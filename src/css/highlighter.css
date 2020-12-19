@@ -92,7 +92,7 @@
 }
 
 .tag {
-  @apply font-hairline;
+  @apply font-light;
   @apply py-2;
   @apply px-2;
   @apply rounded;
