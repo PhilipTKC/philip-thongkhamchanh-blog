@@ -44,7 +44,7 @@ X-GNOME-Autostart-enabled=true
 Name=Monitors
 ```
 
-## Final Notes
+## Final Thoughts
 
 Hopefully [LittleBigMouse](https://github.com/mgth/LittleBigMouse) will make it's way to Linux.
 
