@@ -3,7 +3,7 @@ const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
   purge: {
-    enabled: false,
+    enabled: process.env.NETLIFY === "true",
     content: ["./src/**/*.html", "./src/**/*.ts", "./src/**/*.md"],
   },
   theme: {
