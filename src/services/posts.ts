@@ -1,4 +1,4 @@
-type PostData = {
+interface PostData {
   date: string;
   id: string;
   key: string;
@@ -10,7 +10,7 @@ type PostData = {
   previousTitle?: string;
 };
 
-export type Attributes = {
+export interface Attributes {
   authorId: string;
   category: string;
   title: string;

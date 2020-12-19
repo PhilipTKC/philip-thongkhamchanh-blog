@@ -22,7 +22,7 @@
         <p class="p-8" innerhtml.bind="author.authorDescription"></p>
       </div>
       <div>
-        <author-posts user-posts.bind="authorPosts"></author-posts>
+        <author-posts author-posts.bind="authorPosts"></author-posts>
         <pagination current-page.bind="currentPage" pages.bind="pages" load-to.bind="location"></pagination>
       </div>
       <div class="font-medium text-center" if.bind="error">

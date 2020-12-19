@@ -6,6 +6,9 @@ const customBlock = require("markdown-it-custom-block");
 const divs = require("markdown-it-div");
 const hljs = require("highlight.js");
 
+const emoji = require('markdown-it-emoji');
+const twemoji = require('twemoji');
+
 const labelErrorMessage = `<span class="label">Labels are not formatted correctly. Should be formatted as ["one", "two"]</span>`;
 const labelLink = (label) => `<a><span class='label mr-3 mb-4'>${label}</span></a>`;
 
@@ -49,6 +52,11 @@ const markdownItConfig = markdownIt({
   .use(attrs)
   .use(bracketedSpans)
   .use(customBlock, customBlocks)
-  .use(divs);
+  .use(divs)
+  .use(emoji);
+
+markdownItConfig.renderer.rules.emoji = function (token, idx) {
+  return twemoji.parse(token[idx].content);
+};
 
 module.exports = markdownItConfig;

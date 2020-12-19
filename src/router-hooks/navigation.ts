@@ -1,8 +1,8 @@
 import { ViewportInstruction } from "aurelia";
+import nProgress from "nprogress";
 
 export const hook = {
-  f: async (instructions: ViewportInstruction[]): Promise<boolean> => {
-    const nProgress = await import("nprogress").then(({ default: _ }) => _);
+  fn: async (instructions: ViewportInstruction[]): Promise<boolean> => {
     nProgress.start();
     if (instructions.length === 0) {
       nProgress.done();

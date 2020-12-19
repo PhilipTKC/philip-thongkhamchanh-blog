@@ -1,16 +1,17 @@
 {
   "dependencies": {
-    "@tailwindcss/ui": "^0.6.2",
-    "aurelia": "dev",
-    "dayjs": "^1.9.0",
+    "aurelia": "0.8.0",
+    "dayjs": "^1.9.7",
     "nprogress": "^0.2.0",
-    "tailwindcss": "^1.8.10"
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.2"
   },
   "description": "Blogging Application built with Aurelia2.",
   "devDependencies": {
-    "@aurelia/testing": "dev",
-    "@aurelia/ts-jest": "dev",
-    "@aurelia/webpack-loader": "dev",
+    "@aurelia/testing": "0.8.0",
+    "@aurelia/ts-jest": "0.8.0",
+    "@aurelia/webpack-loader": "0.8.0",
+    "@tailwindcss/postcss7-compat": "^2.0.2",
+    "@tailwindcss/typography": "^0.3.1",
     "@types/jest": "^26.0.10",
     "@types/markdown-it": "^10.0.2",
     "@types/node": "^14.6.0",
@@ -35,12 +36,15 @@
     "markdown-it-bracketed-spans": "^1.0.1",
     "markdown-it-custom-block": "^0.1.1",
     "markdown-it-div": "^1.1.0",
+    "markdown-it-emoji": "^2.0.0",
     "npm-install-webpack-plugin": "^4.0.5",
+    "postcss": "^7.0.35",
     "postcss-loader": "^3.0.0",
     "rimraf": "^3.0.2",
     "style-loader": "^1.2.1",
     "terser-webpack-plugin": "^4.2.2",
     "ts-loader": "^8.0.2",
+    "twemoji": "^13.0.1",
     "typescript": "^4.0.3",
     "url-loader": "^4.1.0",
     "webpack": "^4.44.1",
@@ -76,7 +80,7 @@
     "lint:js": "eslint src test --ext .js,.ts",
     "pretest": "npm run lint",
     "start": "webpack-dev-server",
-    "tailwind": "npx tailwindcss build src/css/tailwind.css -o src/css/output.css",
+    "tailwind": "npx tailwindcss-cli@latest build src/css/tailwind.css -o src/css/output.css",
     "test": "jest"
   },
   "version": "0.1.0"

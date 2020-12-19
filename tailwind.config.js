@@ -2,12 +2,8 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
-  future: {
-    removeDeprecatedGapUtilities: true,
-    purgeLayersByDefault: true,
-  },
   purge: {
-    enabled: process.env.NETLIFY === "true",
+    enabled: false,
     content: ["./src/**/*.html", "./src/**/*.ts", "./src/**/*.md"],
   },
   theme: {
@@ -27,5 +23,5 @@ module.exports = {
     },
   },
   variants: {},
-  plugins: [require("@tailwindcss/ui")],
+  plugins: [require('@tailwindcss/typography')],
 };

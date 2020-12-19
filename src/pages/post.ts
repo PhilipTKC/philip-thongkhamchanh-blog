@@ -2,12 +2,15 @@ import { Author, AuthorService, PostService, Attributes } from "services";
 import { inject, IRouter, IViewModel } from "aurelia";
 import { ITraverse } from "components/traverse";
 
-type Parameters = {
+import "../css/highlighter.css";
+import nProgress from "nprogress";
+
+interface Parameters {
   date: string;
   id: string;
 };
 
-type IPost = {
+interface IPost {
   attributes: Attributes;
   html: string;
 };
@@ -22,7 +25,7 @@ export class Post implements IViewModel {
 
   private traverse: ITraverse;
 
-  constructor(private readonly authorService: AuthorService, private readonly posts: PostService, @IRouter private router: IRouter) {}
+  constructor(private readonly authorService: AuthorService, private readonly posts: PostService, @IRouter private router: IRouter) { }
 
   async load(parameters: Parameters): Promise<void> {
     const postData = await this.posts.retrieveData(parameters.id);
@@ -40,9 +43,8 @@ export class Post implements IViewModel {
     }
   }
 
-  async afterAttach(): Promise<void> {
+  async attached(): Promise<void> {
     window.scrollTo(0, 0);
-    await import(/* webpackPrefetch: true */ "../css/highlighter.css");
-    await import("nprogress").then(({ default: _ }) => _.done());
+    nProgress.done();
   }
 }

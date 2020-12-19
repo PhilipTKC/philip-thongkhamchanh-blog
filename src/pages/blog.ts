@@ -4,7 +4,9 @@ import { inject, IViewModel } from "aurelia";
 import configuration from "blog.config.json";
 import { pages } from "content/pagination/pages.json";
 
-type Parameters = {
+import nProgress from "nprogress";
+
+interface Parameters {
   page: string;
 };
 
@@ -39,9 +41,9 @@ export class Blog implements IViewModel {
     }
   }
 
-  async afterAttach(): Promise<void> {
+  async attached(): Promise<void> {
     window.scrollTo(0, 0);
-    await import("nprogress").then(({ default: _ }) => _.done());
+    nProgress.done();
   }
 
   async retrievePage(page: number): Promise<void> {

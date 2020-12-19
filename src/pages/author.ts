@@ -1,7 +1,9 @@
 import { AuthorService, Author as IContributer } from "services";
 import { inject, IViewModel } from "aurelia";
 
-type Parameters = {
+import nProgress from "nprogress";
+
+interface Parameters {
   author: string;
   page: string;
 };
@@ -42,8 +44,8 @@ export class Author implements IViewModel {
     }
   }
 
-  afterAttach(): void {
+  attached(): void {
     window.scrollTo(0, 0);
-    import("nprogress").then(({ default: _ }) => _.done());
+    nProgress.done();
   }
 }

@@ -2,24 +2,23 @@ import { IRouter, IViewModel } from "aurelia";
 import { hooks } from "router-hooks";
 import { routes } from "routes";
 
+import "./css/output.css";
+import "./css/nprogress.css";
+
 export class App implements IViewModel {
   private static routes = routes;
 
   private isDark: boolean;
 
-  constructor(@IRouter private router: IRouter) {}
+  constructor(@IRouter private router: IRouter) { }
 
-  async afterBind(): Promise<void> {
-    this.router.addHook(hooks.navigation.f);
-    this.router.addHook(hooks.title.f, hooks.title.options);
-
-    await this.loadStyles();
+  async bound(): Promise<void> {
+    this.setTheme();
+    this.router.addHook(hooks.navigation.fn);
+    this.router.addHook(hooks.title.fn, hooks.title.options);
   }
 
-  async loadStyles(): Promise<void> {
-    await import("./css/output.css");
-    await import("./css/nprogress.css");
-
+  async setTheme(): Promise<void> {
     const isDark = localStorage.getItem("isDark");
 
     if (isDark === "true") {
@@ -30,12 +29,15 @@ export class App implements IViewModel {
 
   loadDarkTheme(): void {
     const headElement = document.getElementsByTagName("head")[0];
-    const linkElement: HTMLLinkElement = document.createElement("link");
+    let linkElement = document.createElement("link");
+
     linkElement.id = "dark";
     linkElement.rel = "stylesheet";
     linkElement.type = "text/css";
     linkElement.href = "./dark.css";
+
     headElement.appendChild(linkElement);
+
     this.isDark = true;
     localStorage.setItem("isDark", "true");
   }

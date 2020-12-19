@@ -83,12 +83,12 @@
 
 .prose code {
   @apply bg-gray-700;
-  @apply font-medium;
+  @apply font-normal !important;
   @apply leading-tight;
   @apply px-2;
-  @apply py-2.5;
+  @apply py-1;
   @apply rounded;
-  @apply text-white;
+  @apply text-white !important;
 }
 
 .tag {
@@ -96,7 +96,7 @@
   @apply py-2;
   @apply px-2;
   @apply rounded;
-  @apply text-gray-50;
+  @apply text-gray-100;
   @apply text-xs;
   @apply uppercase;
   @apply w-auto;

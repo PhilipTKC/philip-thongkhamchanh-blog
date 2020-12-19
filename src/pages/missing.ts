@@ -1,6 +1,8 @@
 import { IViewModel } from "aurelia";
 
-type Parameters = {
+import nProgress from "nprogress";
+
+interface Parameters {
   id: string;
 };
 
@@ -16,6 +18,6 @@ export class Missing implements IViewModel {
   }
 
   async afterAttach(): Promise<void> {
-    await import("nprogress").then(({ default: _ }) => _.done());
+    nProgress.done();
   }
 }
