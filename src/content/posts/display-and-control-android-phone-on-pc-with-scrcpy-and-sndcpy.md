@@ -46,7 +46,6 @@ X Error:  GLXBadContext
   Request Minor code 6 ()
   Error Serial #116
   Current Serial #115
-s
 ```
 :::
 

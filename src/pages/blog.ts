@@ -1,5 +1,5 @@
 import { AuthorService, PostService } from "services";
-import { inject, IViewModel } from "aurelia";
+import { inject, ICustomElementViewModel } from "aurelia";
 
 import configuration from "blog.config.json";
 import { pages } from "content/pagination/pages.json";
@@ -11,7 +11,7 @@ interface Parameters {
 };
 
 @inject(AuthorService, PostService)
-export class Blog implements IViewModel {
+export class Blog implements ICustomElementViewModel {
   private static parameters: string[] = ["page"];
 
   private blogPosts = [];

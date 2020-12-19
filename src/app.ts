@@ -1,11 +1,11 @@
-import { IRouter, IViewModel } from "aurelia";
+import { ICustomElementViewModel, IRouter } from "aurelia";
 import { hooks } from "router-hooks";
 import { routes } from "routes";
 
 import "./css/output.css";
 import "./css/nprogress.css";
 
-export class App implements IViewModel {
+export class App implements ICustomElementViewModel {
   private static routes = routes;
 
   private isDark: boolean;

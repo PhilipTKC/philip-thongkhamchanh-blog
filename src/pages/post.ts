@@ -1,5 +1,5 @@
 import { Author, AuthorService, PostService, Attributes } from "services";
-import { inject, IRouter, IViewModel } from "aurelia";
+import { inject, IRouter, ICustomElementViewModel } from "aurelia";
 import { ITraverse } from "components/traverse";
 
 import "../css/highlighter.css";
@@ -16,7 +16,7 @@ interface IPost {
 };
 
 @inject(AuthorService, PostService)
-export class Post implements IViewModel {
+export class Post implements ICustomElementViewModel {
   static title = (instance: Post): string => (instance.post ? instance.post.attributes.title : "Blog Post Not Found");
 
   private author: Author;

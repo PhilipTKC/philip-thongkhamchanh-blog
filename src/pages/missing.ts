@@ -1,4 +1,4 @@
-import { IViewModel } from "aurelia";
+import { ICustomElementViewModel } from "aurelia";
 
 import nProgress from "nprogress";
 
@@ -6,7 +6,7 @@ interface Parameters {
   id: string;
 };
 
-export class Missing implements IViewModel {
+export class Missing implements ICustomElementViewModel {
   private static parameters: string[] = ["id"];
 
   private static title = (instance: Missing) => `404 | ${instance.missingComponent} not found`;

@@ -1,5 +1,5 @@
 import { AuthorService, Author as IContributer } from "services";
-import { inject, IViewModel } from "aurelia";
+import { inject, ICustomElementViewModel } from "aurelia";
 
 import nProgress from "nprogress";
 
@@ -9,7 +9,7 @@ interface Parameters {
 };
 
 @inject(AuthorService)
-export class Author implements IViewModel {
+export class Author implements ICustomElementViewModel {
   private static parameters: string[] = ["author", "page"];
 
   private static title = (instance: Author) => `${instance.author !== undefined ? instance.author.author : "Not Found"} | Contributor`;
@@ -26,7 +26,7 @@ export class Author implements IViewModel {
 
   private pages: number;
 
-  constructor(private readonly authorService: AuthorService) {}
+  constructor(private readonly authorService: AuthorService) { }
 
   async load(parameters: Parameters): Promise<void> {
     this.currentPage = Number(parameters.page) || 1;
