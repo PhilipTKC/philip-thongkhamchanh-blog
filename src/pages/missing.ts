@@ -1,12 +1,12 @@
-import { ICustomElementViewModel } from "aurelia";
+import { IRouteableComponent } from "@aurelia/router";
 
 import nProgress from "nprogress";
 
-interface Parameters {
+type Parameters = {
   id: string;
 };
 
-export class Missing implements ICustomElementViewModel {
+export class Missing implements IRouteableComponent {
   private static parameters: string[] = ["id"];
 
   private static title = (instance: Missing) => `404 | ${instance.missingComponent} not found`;

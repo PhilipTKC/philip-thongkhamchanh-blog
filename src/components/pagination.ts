@@ -1,6 +1,6 @@
-import { bindable } from "aurelia";
+import { bindable, ICustomElementViewModel } from "aurelia";
 
-export class Pagination {
+export class Pagination  implements ICustomElementViewModel {
   @bindable currentPage: number;
 
   @bindable loadTo: string;

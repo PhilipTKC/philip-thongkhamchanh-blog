@@ -1,15 +1,16 @@
 import { AuthorService, Author as IContributer } from "services";
 import { inject, ICustomElementViewModel } from "aurelia";
+import { IRouteableComponent } from "@aurelia/router";
 
 import nProgress from "nprogress";
 
-interface Parameters {
+type Parameters = {
   author: string;
   page: string;
 };
 
 @inject(AuthorService)
-export class Author implements ICustomElementViewModel {
+export class Author implements IRouteableComponent {
   private static parameters: string[] = ["author", "page"];
 
   private static title = (instance: Author) => `${instance.author !== undefined ? instance.author.author : "Not Found"} | Contributor`;

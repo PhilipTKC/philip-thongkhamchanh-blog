@@ -1,11 +1,12 @@
 import { Author, AuthorService, PostService, Attributes } from "services";
-import { inject, IRouter, ICustomElementViewModel } from "aurelia";
+import { inject, IRouter } from "aurelia";
+import { IRouteableComponent } from "@aurelia/router";
 import { ITraverse } from "components/traverse";
 
 import "../css/highlighter.css";
 import nProgress from "nprogress";
 
-interface Parameters {
+type Parameters = {
   date: string;
   id: string;
 };
@@ -16,7 +17,7 @@ interface IPost {
 };
 
 @inject(AuthorService, PostService)
-export class Post implements ICustomElementViewModel {
+export class Post implements IRouteableComponent {
   static title = (instance: Post): string => (instance.post ? instance.post.attributes.title : "Blog Post Not Found");
 
   private author: Author;

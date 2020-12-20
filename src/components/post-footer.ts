@@ -1,6 +1,6 @@
-import { bindable } from "aurelia";
+import { bindable, ICustomElementViewModel } from "aurelia";
 
-export class PostFooter {
+export class PostFooter  implements ICustomElementViewModel {
   @bindable avatar: string;
 
   @bindable author: string;

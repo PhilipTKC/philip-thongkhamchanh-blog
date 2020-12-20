@@ -1,5 +1,5 @@
-import { bindable } from "aurelia";
+import { bindable, ICustomElementViewModel } from "aurelia";
 
-export class AuthorPosts {
+export class AuthorPosts implements ICustomElementViewModel {
   @bindable authorPosts: any;
 }

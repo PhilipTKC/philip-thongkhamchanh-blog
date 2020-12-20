@@ -1,4 +1,4 @@
-import { bindable } from "aurelia";
+import { bindable, ICustomElementViewModel } from "aurelia";
 
 export type ITraverse = {
   nextTitle?: string;
@@ -7,6 +7,6 @@ export type ITraverse = {
   previousId?: string;
 };
 
-export class Traverse {
+export class Traverse  implements ICustomElementViewModel {
   @bindable traverse: ITraverse;
 }

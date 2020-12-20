@@ -1,17 +1,18 @@
 import { AuthorService, PostService } from "services";
 import { inject, ICustomElementViewModel } from "aurelia";
+import { IRouteableComponent } from "@aurelia/router";
 
 import configuration from "blog.config.json";
 import { pages } from "content/pagination/pages.json";
 
 import nProgress from "nprogress";
 
-interface Parameters {
+type Parameters = {
   page: string;
 };
 
 @inject(AuthorService, PostService)
-export class Blog implements ICustomElementViewModel {
+export class Blog implements IRouteableComponent {
   private static parameters: string[] = ["page"];
 
   private blogPosts = [];
