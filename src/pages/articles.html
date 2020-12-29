@@ -7,7 +7,7 @@
     </div>
 
     <div class="py-4" repeat.for="post of blogPosts">
-      <a load="/blog/${post.id}" class="focus:outline-none">
+      <a load="/${post.id}" class="focus:outline-none">
         <article>
           <post-content title.bind="post.title" summary.bind="post.summary"></post-content>
         </article>

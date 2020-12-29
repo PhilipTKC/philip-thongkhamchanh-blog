@@ -1,13 +1,13 @@
-<div class="shadow overflow-hidden sm:rounded-md">
+<div class="overflow-hidden shadow sm:rounded-md">
   <ul>
     <li repeat.for="post of authorPosts">
-      <a load="/blog/${post.id}" class="block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out">
+      <a load="/${post.id}" class="block transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus:bg-gray-50">
         <div class="flex items-center px-4 py-4 sm:px-6">
-          <div class="min-w-0 flex-1 flex items-center">
-            <div class="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
+          <div class="flex items-center flex-1 min-w-0">
+            <div class="flex-1 min-w-0 px-4 md:grid md:grid-cols-2 md:gap-4">
               <div>
-                <div class="text-md leading-5 font-medium text-indigo-600 truncate">${post.title}</div>
-                <div class="mt-2 flex items-center text-sm leading-5 text-gray-500">
+                <div class="font-medium leading-5 text-indigo-600 truncate text-md">${post.title}</div>
+                <div class="flex items-center mt-2 text-sm leading-5 text-gray-500">
                   <span class="truncate">
                     Published on <span class="underline">${post.date | humanReadableDate}</span> to
                     <span class="underline">${post.category}</span>

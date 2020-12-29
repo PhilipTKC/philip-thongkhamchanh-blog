@@ -12,7 +12,7 @@ type Parameters = {
 };
 
 @inject(AuthorService, PostService)
-export class Blog implements IRouteableComponent {
+export class Articles implements IRouteableComponent {
   private static parameters: string[] = ["page"];
 
   private blogPosts = [];
@@ -23,7 +23,7 @@ export class Blog implements IRouteableComponent {
 
   private error: boolean;
 
-  private readonly location = "/blog";
+  private readonly location = "/articles";
 
   private readonly pages = pagination.pages;
 
