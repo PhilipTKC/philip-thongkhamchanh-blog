@@ -4,7 +4,6 @@ const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
-const webpack = require("webpack");
 const markdownItConfig = require("./markdown.config");
 
 const cssLoader = "css-loader";
@@ -103,7 +102,7 @@ module.exports = function (env, { analyze }) {
           loader: "frontmatter-markdown-loader",
           options: {
             markdownIt: markdownItConfig,
-            mode: ["body", "html"],
+            mode: ["html"],
           },
         },
       ],

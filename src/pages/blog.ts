@@ -42,7 +42,7 @@ export class Blog implements IRouteableComponent {
     }
   }
 
-  async attached(): Promise<void> {
+  attached(): void {
     window.scrollTo(0, 0);
     nProgress.done();
   }

@@ -1,9 +1,2 @@
-import { hook as navigation } from "./navigation";
-import { hook as title } from "./title";
-
-const hooks = {
-  navigation,
-  title,
-};
-
-export { hooks };
+export { navigationHook } from "./navigation";
+export { titleHook } from "./title";

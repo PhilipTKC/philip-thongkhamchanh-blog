@@ -3,7 +3,7 @@ import { HookTypes } from "@aurelia/router";
 
 const appName = "Philip Thongkhamchanh Blog";
 
-export const hook = {
+export const titleHook = {
   fn: async (instructions: ViewportInstruction[]): Promise<string | ViewportInstruction[]> => {
     if (instructions.length > 0 && typeof instructions === "object") {
       const instruct = instructions[0];

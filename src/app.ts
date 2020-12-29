@@ -1,24 +1,24 @@
-import { ICustomElementViewModel, IRouter } from "aurelia";
-import { hooks } from "router-hooks";
+import { IRouter } from "aurelia";
+import { navigationHook, titleHook } from "router-hooks";
 import { routes } from "routes";
 
 import "./css/output.css";
 import "./css/nprogress.css";
 
-export class App implements ICustomElementViewModel {
+export class App {
   private static routes = routes;
 
   private isDark: boolean;
 
   constructor(@IRouter private router: IRouter) { }
 
-  async bound(): Promise<void> {
+  attached(): void {
     this.setTheme();
-    this.router.addHook(hooks.navigation.fn);
-    this.router.addHook(hooks.title.fn, hooks.title.options);
+    this.router.addHook(navigationHook.fn);
+    this.router.addHook(titleHook.fn, titleHook.options);
   }
 
-  async setTheme(): Promise<void> {
+  setTheme(): void {
     const isDark = localStorage.getItem("isDark");
 
     if (isDark === "true") {

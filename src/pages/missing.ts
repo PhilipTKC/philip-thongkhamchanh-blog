@@ -17,7 +17,7 @@ export class Missing implements IRouteableComponent {
     this.missingComponent = parameters.id;
   }
 
-  async afterAttach(): Promise<void> {
+  attached(): void {
     nProgress.done();
   }
 }
