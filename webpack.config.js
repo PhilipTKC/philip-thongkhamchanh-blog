@@ -5,23 +5,19 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
 const webpack = require("webpack");
-const zlib = require("zlib");
-const markdownItConfig = require("./markdownit.config");
+const markdownItConfig = require("./markdown.config");
 
 const cssLoader = "css-loader";
 
 const postcssLoader = {
-  loader: "postcss-loader",
+  loader: 'postcss-loader',
   options: {
-    plugins: () => [
-      require("tailwindcss"),
-      require("autoprefixer")(),
-      require("cssnano")({
-        preset: "default",
-      }),
-    ],
-  },
+    postcssOptions: {
+      plugins: ['autoprefixer', 'cssnano', 'tailwindcss']
+    }
+  }
 };
+
 const srcDir = path.resolve(__dirname, "src");
 const outDir = path.resolve(__dirname, "dist");
 
@@ -34,9 +30,9 @@ module.exports = function (env, { analyze }) {
     cache: production ? false : { type: "memory" },
     output: {
       path: path.resolve(__dirname, "dist"),
-      filename: production ? "[name].[chunkhash].bundle.js" : "[name].[hash].bundle.js",
-      sourceMapFilename: production ? "[name].[chunkhash].bundle.map" : "[name].[hash].bundle.map",
-      chunkFilename: production ? "[name].[chunkhash].chunk.js" : "[name].[hash].chunk.js",
+      filename: production ? "[name].[chunkhash].bundle.js" : "[name].[fullhash].bundle.js",
+      sourceMapFilename: production ? "[name].[chunkhash].bundle.map" : "[name].[fullhash].bundle.map",
+      chunkFilename: production ? "[name].[chunkhash].chunk.js" : "[name].[fullhash].chunk.js",
     },
     optimization: {
       minimize: production ? true : false,

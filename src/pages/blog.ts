@@ -1,9 +1,9 @@
 import { AuthorService, PostService } from "services";
-import { inject, ICustomElementViewModel } from "aurelia";
+import { inject } from "aurelia";
 import { IRouteableComponent } from "@aurelia/router";
 
 import configuration from "blog.config.json";
-import { pages } from "content/pagination/pages.json";
+import pagination from "content/pagination/pages.json";
 
 import nProgress from "nprogress";
 
@@ -25,7 +25,7 @@ export class Blog implements IRouteableComponent {
 
   private readonly location = "/blog";
 
-  private readonly pages = pages;
+  private readonly pages = pagination.pages;
 
   private readonly postPerPage = configuration.postsPerPage + 1;
 

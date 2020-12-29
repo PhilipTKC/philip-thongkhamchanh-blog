@@ -1,13 +1,12 @@
 ---
 author: PhilipTKC
-title: Dual Monitor Setup in Deepin v20 (Issue)
+title: Dual Monitor Setup in Deepin v20
 date: 2020-12-19T00:00:00.001Z
+last_updated: 2020-12-29T00:00:00.001Z
 summary: I have two monitors at two different resolutions. They are vertically centered on a single monitor stand.
 category: DeepinLinux
 published: true
 ---
-
-## The Issue
 
 I have two monitors at two different resolutions. They are vertically centered on a single monitor stand.
 
@@ -20,9 +19,7 @@ In this case I want to place monitor 1 on the top center of monitor 2, however M
 ![Dual Monitor Setup](./assets/images/screen-display-01.png)
 :::
 
-Fortunately, I found ARandR, and hoped all my problems would vanish...
-
-Unfortunately that wasn't the case and while ARandR addresses the issue with monitor placement it does not address the DPI differences between monitors.
+Fortunately, I found ARandR, and hoped all my problems would vanish, unfortunately that wasn't the case and while ARandR addresses the issue with monitor placement it does not address the DPI differences between monitors which causes the mouse placement to be misaligned when moving between screens.
 
 ## The Solution
 
@@ -44,8 +41,8 @@ X-GNOME-Autostart-enabled=true
 Name=Monitors
 ```
 
-## Final Thoughts
-
-Hopefully [LittleBigMouse](https://github.com/mgth/LittleBigMouse) will make it's way to Linux.
+Running a single monitor with the script enabled on startup may cause scaling to be increased which is present on DeepinLinux v20. 
 
 While my current solution is far from perfect it'll have to do for now.
+
+Hopefully [LittleBigMouse](https://github.com/mgth/LittleBigMouse) will make it's way to Linux.
