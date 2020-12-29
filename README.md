@@ -2,8 +2,9 @@
 
 This project is bootstrapped by [aurelia/new](https://github.com/aurelia/new).
 
-## Build CSS
+## Run Install
 
+    npm install
     npm run tailwind
 
 ## Start dev web server

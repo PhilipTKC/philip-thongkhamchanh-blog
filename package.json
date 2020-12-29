@@ -78,7 +78,7 @@
     "lint:html": "htmlhint -c .htmlhintrc src",
     "lint:js": "eslint src test --ext .js,.ts",
     "pretest": "npm run lint",
-    "start": "webpack serve",
+    "start": "webpack serve ",
     "tailwind": "npx tailwindcss-cli@latest build src/css/tailwind.css -o src/css/output.css",
     "test": "jest"
   },

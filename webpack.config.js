@@ -23,6 +23,7 @@ const outDir = path.resolve(__dirname, "dist");
 
 module.exports = function (env, { analyze }) {
   const production = env === "production" || process.env.NODE_ENV === "production";
+  const netlify = process.env.NETLIFY === "true";
   return {
     mode: production ? "production" : "development",
     devtool: production ? "source-map" : "eval",
@@ -112,7 +113,7 @@ module.exports = function (env, { analyze }) {
       new CopyWebpackPlugin({
         patterns: [{ from: "static", to: path.resolve(__dirname, "dist") }],
       }),
-      production &&
+      netlify &&
         new CompressionPlugin({
           filename: "[path][base].br",
           algorithm: "brotliCompress",
