@@ -1,56 +1,35 @@
 <nav class="flex items-center justify-between my-12 text-sm border-t border-gray-200">
   <div class="flex">
-    <a
-      if.bind="currentPage > 2"
-      load="${loadTo}/1"
-      class="inline-flex items-center hidden pt-4 pl-1 mr-4 -mt-px font-medium leading-5 text-gray-500 border-t-2 border-transparent hover:text-indigo-700 hover:border-indigo-300 focus:outline-none md:inline-block"
-    >
+    <a if.bind="currentPage > 2" load="${loadTo}/1"
+      class="inline-flex items-center pt-4 pl-1 mr-4 -mt-px font-medium leading-5 text-gray-500 border-t-2 border-transparent hover:text-indigo-700 hover:border-indigo-300 focus:outline-none md:inline-block">
       First
     </a>
-    <a
-      if.bind="currentPage > 1"
-      load="${loadTo}/${currentPage - 1}"
-      class="inline-flex items-center pt-4 pl-1 -mt-px font-medium leading-5 text-gray-500 border-t-2 border-transparent hover:text-indigo-700 hover:border-indigo-300 focus:outline-none"
-    >
+    <a if.bind="currentPage > 1" load="${loadTo}/${currentPage - 1}"
+      class="inline-flex items-center pt-4 pl-1 -mt-px font-medium leading-5 text-gray-500 border-t-2 border-transparent hover:text-indigo-700 hover:border-indigo-300 focus:outline-none">
       Previous
     </a>
   </div>
   <div class="flex ml-2 mr-2">
-    <a
-      if.bind="currentPage > 10"
-      load="${loadTo}/${currentPage - 10}"
-      class="inline-flex items-center hidden px-4 pt-4 mr-4 -mt-px font-medium leading-5 text-gray-500 border-t-2 border-transparent hover:text-indigo-700 hover:border-indigo-300 focus:outline-none md:inline-block"
-    >
+    <a if.bind="currentPage > 10" load="${loadTo}/${currentPage - 10}"
+      class="inline-flex items-center px-4 pt-4 mr-4 -mt-px font-medium leading-5 text-gray-500 border-t-2 border-transparent hover:text-indigo-700 hover:border-indigo-300 focus:outline-none md:inline-block">
       ${currentPage - 10}
     </a>
-    <a
-      repeat.for="page of pages | paginator:currentPage"
-      load="${loadTo}/${page}"
-      class="-mt-px border-t-2 border-transparent pt-4 px-4 inline-flex items-center leading-5 font-medium text-gray-500 hover:text-indigo-700 hover:border-indigo-300 focus:outline-none ${currentPage === page ? 'border-indigo-300 font-bold pointer-events-none text-indigo-700' : ''}"
-    >
+    <a repeat.for="page of pages | paginator:currentPage" load="${loadTo}/${page}"
+      class="-mt-px border-t-2 border-transparent pt-4 px-4 inline-flex items-center leading-5 font-medium text-gray-500 hover:text-indigo-700 hover:border-indigo-300 focus:outline-none ${currentPage === page ? 'border-indigo-300 font-bold pointer-events-none text-indigo-700' : ''}">
       ${page}
     </a>
-    <a
-      if.bind="currentPage < pages - 10"
-      load="${loadTo}/${currentPage + 10}"
-      class="inline-flex items-center hidden px-4 pt-4 ml-4 -mt-px font-medium leading-5 text-gray-500 border-t-2 border-transparent hover:text-indigo-700 hover:border-indigo-300 focus:outline-none md:inline-block"
-    >
+    <a if.bind="currentPage < pages - 10" load="${loadTo}/${currentPage + 10}"
+      class="inline-flex items-center px-4 pt-4 ml-4 -mt-px font-medium leading-5 text-gray-500 border-t-2 border-transparent hover:text-indigo-700 hover:border-indigo-300 focus:outline-none md:inline-block">
       ${currentPage + 10}
     </a>
   </div>
   <div class="flex">
-    <a
-      if.bind="currentPage !== pages"
-      load="${loadTo}/${currentPage + 1}"
-      class="inline-flex items-center pt-4 pl-1 -mt-px font-medium leading-5 text-gray-500 border-t-2 border-transparent hover:text-indigo-700 hover:border-indigo-300 focus:outline-none"
-    >
+    <a if.bind="currentPage !== pages" load="${loadTo}/${currentPage + 1}"
+      class="inline-flex items-center pt-4 pl-1 -mt-px font-medium leading-5 text-gray-500 border-t-2 border-transparent hover:text-indigo-700 hover:border-indigo-300 focus:outline-none">
       Next
     </a>
-    <a
-      if.bind="currentPage < pages - 1"
-      load="${loadTo}/${pages}"
-      class="inline-flex items-center hidden pt-4 pl-1 ml-4 -mt-px font-medium leading-5 text-gray-500 border-t-2 border-transparent hover:text-indigo-700 hover:border-indigo-300 focus:outline-none md:inline-block"
-    >
+    <a if.bind="currentPage < pages - 1" load="${loadTo}/${pages}"
+      class="inline-flex items-center pt-4 pl-1 ml-4 -mt-px font-medium leading-5 text-gray-500 border-t-2 border-transparent hover:text-indigo-700 hover:border-indigo-300 focus:outline-none md:inline-block">
       Last
     </a>
   </div>

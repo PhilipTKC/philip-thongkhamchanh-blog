@@ -6,7 +6,7 @@ import { contributorDataPath, dataPath, paginationDataPath, postsDataPath, posts
 
 const folders = [`${contributorDataPath}/**/*`, `${postsDataPath}/**/*.*`, `${paginationDataPath}/**/*.*`, `${dataPath}/**/*.*`];
 
-const watcher = chokidar.watch("file", {
+const watcher = chokidar.watch('file, dir, glob, or array', {
   ignored: [/(^|[/\\])\../],
   persistent: false,
 });
