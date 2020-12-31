@@ -21,8 +21,8 @@ const srcDir = path.resolve(__dirname, "src");
 const outDir = path.resolve(__dirname, "dist");
 
 module.exports = function (env, { analyze }) {
-  const production = env === "production" || process.env.NODE_ENV === "production";
-  const netlify = process.env.NETLIFY === "true";
+  const production = env.production || process.env.NODE_ENV === "production";
+  
   return {
     mode: production ? "production" : "development",
     devtool: production ? "source-map" : "eval",
@@ -113,17 +113,17 @@ module.exports = function (env, { analyze }) {
         patterns: [{ from: "static", to: path.resolve(__dirname, "dist") }],
       }),
       netlify &&
-        new CompressionPlugin({
-          filename: "[path][base].br",
-          algorithm: "brotliCompress",
-          test: /\.(js|ts|css|html|svg|md|json)$/,
-          compressionOptions: {
-            level: 11,
-          },
-          threshold: 0,
-          minRatio: 0.8,
-          deleteOriginalAssets: false,
-        }),
+      new CompressionPlugin({
+        filename: "[path][base].br",
+        algorithm: "brotliCompress",
+        test: /\.(js|ts|css|html|svg|md|json)$/,
+        compressionOptions: {
+          level: 11,
+        },
+        threshold: 0,
+        minRatio: 0.8,
+        deleteOriginalAssets: false,
+      }),
       analyze && new BundleAnalyzerPlugin(),
     ].filter((p) => p),
   };

@@ -4,15 +4,6 @@
 <import from="./pages/post"></import>
 
 <div>
-  <div class="absolute top-0 right-0 z-50 p-2 mt-12 text-xl lg:fixed">
-    <div class="cursor-pointer ${isDark ? 'text-white' : ''}">
-      <span if.bind="isDark" click.delegate="removeDarkTheme()" class="text-yellow-200 hover:text-gray-500">
-        <i class="fal fa-eclipse"></i>
-      </span>
-      <span if.bind="!isDark" click.delegate="loadDarkTheme()" class="text-gray-500 hover:text-yellow-300">
-        <i class="fal fa-sun"></i>
-      </span>
-    </div>
-  </div>
+  <theme-changer></theme-changer>
   <au-viewport name="main" default="articles" fallback="missing"></au-viewport>
 </div>
