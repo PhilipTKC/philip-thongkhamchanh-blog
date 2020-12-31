@@ -73,7 +73,7 @@
   },
   "scripts": {
     "analyze": "rimraf dist && webpack --env production --analyze",
-    "build": "rimraf dist && webpack --env asd",
+    "build": "rimraf dist && webpack --env production",
     "lint": "npm run lint:js && npm run lint:html",
     "lint:html": "htmlhint -c .htmlhintrc src",
     "lint:js": "eslint src test --ext .js,.ts",
