@@ -21,7 +21,7 @@ export interface Attributes {
 export class PostService {
   async retrievePage(page: number): Promise<any> {
     try {
-      const pageContent = await import(`content/pagination/${page}.json`).then(({ default: _ }) => _);
+      const pageContent = await import(`../../content/pagination/${page}.json`).then(({ default: _ }) => _);
       return pageContent;
     } catch (_) {
       return undefined;
@@ -31,7 +31,7 @@ export class PostService {
   async retrievePost(entry: PostData | string): Promise<any> {
     try {
       if (typeof entry === "string") {
-        const post = await import(`content/posts/${entry}.md`).then(({ default: _ }) => _);
+        const post = await import(`../../content/posts/${entry}.md`).then(({ default: _ }) => _);
         return post;
       }
     } catch (_) {
@@ -42,7 +42,7 @@ export class PostService {
   async retrieveData(entry: PostData | string): Promise<PostData> {
     try {
       if (typeof entry === "string") {
-        const data = await import(`content/posts-data/${entry}.json`).then(({ default: _ }) => _);
+        const data = await import(`../../content/posts-data/${entry}.json`).then(({ default: _ }) => _);
         return data;
       }
     } catch (_) {

@@ -2,8 +2,8 @@ import { AuthorService, PostService } from "services";
 import { inject } from "aurelia";
 import { IRouteableComponent } from "@aurelia/router";
 
-import configuration from "blog.config.json";
-import pagination from "content/pagination/pages.json";
+import configuration from "../../blog.config.json";
+import pagination from "../../content/pagination/pages.json";
 
 import nProgress from "nprogress";
 

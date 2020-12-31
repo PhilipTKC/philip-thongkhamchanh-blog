@@ -9,12 +9,12 @@ import nProgress from "nprogress";
 type Parameters = {
   date: string;
   id: string;
-};
+}
 
 interface IPost {
   attributes: Attributes;
   html: string;
-};
+}
 
 @inject(AuthorService, PostService)
 export class Post implements IRouteableComponent {

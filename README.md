@@ -17,13 +17,13 @@ This project is bootstrapped by [aurelia/new](https://github.com/aurelia/new).
 
 # Blog Post
 
-Create blog post inside `src/content/posts` as a markdown file.
+Create blog post inside `content/posts` as a markdown file.
 
 The markdown file requires the following `Front Matter`
 
 `authorId, title, date, published, summary, category`
 
-See `src/content/contributors/contributors.json` for adding blog contributors. `authorId` can match any contributor id.
+See `content/contributors/contributors.json` for adding blog contributors. `authorId` can match any contributor id.
 
 ```
 ---
@@ -66,7 +66,7 @@ Run build script once you're done editing to update data made to the YAML header
 
 ### Pagination
 
-Edit `src/blog.config.json` to change the amount of post shown on a single page. By editing this value you must run the build command to update pagination data contained in `src/content/pagination`.
+Edit `blog.config.json` to change the amount of post shown on a single page. By editing this value you must run the build command to update pagination data contained in `content/pagination`.
 
 ### Build
 
@@ -74,4 +74,4 @@ Edit `src/blog.config.json` to change the amount of post shown on a single page.
 
 `npx ts-node src/index.ts`
 
-This will update data contained inside the `[rootDir]/src/content` folder.
+This will update data contained inside the `content` folder.

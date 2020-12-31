@@ -12,8 +12,8 @@ import {
   writePositionFile,
 } from "./common";
 
-import { postsPerPage } from "../../src/blog.config.json";
-import authors from "../../src/content/authors/authors.json";
+import { postsPerPage } from "../../blog.config.json";
+import authors from "../../content/authors/authors.json";
 
 interface FileDataAttributes {
   date: Date;
@@ -23,7 +23,7 @@ interface FileDataAttributes {
   postDataPath: string;
   published: boolean;
   slug: string;
-};
+}
 
 interface YAMLHeaders {
   author: string;
@@ -34,7 +34,7 @@ interface YAMLHeaders {
   summary: string;
   title: string;
   isTemplate?: boolean;
-};
+}
 
 interface FullHeaders extends YAMLHeaders {
   avatar: string;
@@ -48,9 +48,9 @@ interface Result {
   body: string;
   bodyBegin: number;
   frontmatter: string;
-};
+}
 
-interface AuthorPost { [author: string]: YAMLHeaders[] | [] };
+interface AuthorPost { [author: string]: YAMLHeaders[] | [] }
 
 type AuthorPostsList = AuthorPost[];
 
@@ -62,7 +62,7 @@ interface Author {
   name: string;
   twitter: string;
   website: string;
-};
+}
 
 interface Traverse {
   date: Date;
@@ -74,13 +74,13 @@ interface Traverse {
   previousPost?: string;
   previousTitle?: string;
   title?: string;
-};
+}
 
 interface Concatenation {
   end: Traverse;
   next: Traverse;
   start: Traverse;
-};
+}
 
 function generateData(): void {
   const fileData: FileDataAttributes[] = retrieveBlogPostFromFolder();

@@ -5,11 +5,11 @@ import { Traverse } from "./data-generator";
 
 export const rootPath = path.resolve(__dirname, "../../");
 
-const dataPath = path.resolve(rootPath, "src/content/data");
-const paginationDataPath = path.resolve(rootPath, "src/content/pagination");
-const contributorDataPath = path.resolve(rootPath, "src/content/authors-data");
-const postsDataPath = path.resolve(rootPath, "src/content/posts-data");
-const postsPath = path.resolve(rootPath, "src/content/posts");
+const dataPath = path.resolve(rootPath, "content/data");
+const paginationDataPath = path.resolve(rootPath, "content/pagination");
+const contributorDataPath = path.resolve(rootPath, "content/authors-data");
+const postsDataPath = path.resolve(rootPath, "content/posts-data");
+const postsPath = path.resolve(rootPath, "content/posts");
 
 function readFile(filePath: string): string {
   return fs.readFileSync(filePath, { encoding: "utf8" });

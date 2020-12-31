@@ -29,7 +29,7 @@ export class App {
 
   loadDarkTheme(): void {
     const headElement = document.getElementsByTagName("head")[0];
-    let linkElement = document.createElement("link");
+    const linkElement = document.createElement("link");
 
     linkElement.id = "dark";
     linkElement.rel = "stylesheet";

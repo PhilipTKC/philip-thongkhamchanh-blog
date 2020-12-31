@@ -175,5 +175,5 @@ cd sndcpy
 
 You will be prompted to run Sndcpy on your device. Press "Start Now" and hit enter in terminal once authorized.
 
-# Scrcpy + Sndcpy = <3
+### Scrcpy + Sndcpy = <3
 
