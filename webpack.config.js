@@ -112,7 +112,7 @@ module.exports = function (env, { analyze }) {
       new CopyWebpackPlugin({
         patterns: [{ from: "static", to: path.resolve(__dirname, "dist") }],
       }),
-      netlify &&
+      production &&
       new CompressionPlugin({
         filename: "[path][base].br",
         algorithm: "brotliCompress",
