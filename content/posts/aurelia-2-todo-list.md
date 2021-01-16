@@ -442,5 +442,18 @@ Update `pages/edit.html` with the following.
 - Created custom components that are registed and can be used globally without using import.
 - Data binded todos to custom component.
 
+## Final Notes
 
+While we've created a very minimalistic todo list. Theres a few things that I would've liked to add / update which I may create a blog post about.
+
+- Add / Remove / Update items against a database.
+- Implement Sortable.js.
+
+A demo can be found here
+
+[Aurelia Todo List Example](https://aurelia-todo-list.netlify.app/dashboard)
+
+Source Code
+
+[Github Aurelia Todo List Example](https://github.com/PhilipTKC/tutorials/tree/main/todo-list)
 
