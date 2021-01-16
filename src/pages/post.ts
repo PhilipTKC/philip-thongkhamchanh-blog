@@ -26,6 +26,8 @@ export class Post implements IRouteableComponent {
 
   private traverse: ITraverse;
 
+  private postLength: number;
+
   constructor(private readonly authorService: AuthorService, private readonly posts: PostService, @IRouter private router: IRouter) { }
 
   async load(parameters: Parameters): Promise<void> {
@@ -41,6 +43,8 @@ export class Post implements IRouteableComponent {
         previousTitle: postData.previousTitle,
         previousId: postData.previousPost,
       };
+
+      this.postLength = postData.length;
     }
   }
 

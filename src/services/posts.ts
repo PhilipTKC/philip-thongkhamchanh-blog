@@ -2,13 +2,14 @@ interface PostData {
   date: string;
   id: string;
   key: string;
+  length?: number;
   nextKey?: string;
   nextPost?: string;
   nextTitle?: string;
   previousKey?: string;
   previousPost?: string;
   previousTitle?: string;
-};
+}
 
 export interface Attributes {
   authorId: string;
@@ -16,7 +17,7 @@ export interface Attributes {
   title: string;
   date: Date;
   summary: string;
-};
+}
 
 export class PostService {
   async retrievePage(page: number): Promise<any> {

@@ -6,8 +6,7 @@ export interface Author {
   name: string;
   twitter: string;
   website: string;
-};
-
+}
 export class AuthorService {
   async retrieveAuthor(author: string): Promise<Author> {
     try {
