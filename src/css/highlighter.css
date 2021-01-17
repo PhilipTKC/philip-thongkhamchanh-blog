@@ -74,21 +74,23 @@
 
 /* Extended */
 .prose code::before {
-  content: "";
+  content: "" !important;
 }
 
 .prose code::after {
-  content: "";
+  content: "" !important;
+}
+
+.prose pre code {
+  @apply text-white !important;
 }
 
 .prose code {
-  @apply bg-gray-700;
-  @apply font-normal !important;
+  @apply font-normal;
   @apply leading-tight;
-  @apply px-2;
   @apply py-1;
   @apply rounded;
-  @apply text-white !important;
+  @apply text-indigo-500 !important;
 }
 
 .tag {

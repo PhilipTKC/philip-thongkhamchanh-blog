@@ -117,18 +117,18 @@ For the purpose of demonstrating how we can route to another page, we'll add a `
 
 ```ts
 export class MyApp {
-    static routes = [{
+  static routes = [{
     path: "dashboard", instructions: [{ component: "dashboard" }]
   },
   {
     path: "edit/:id", instructions: [{ component: "edit" }]
-  }]
+  }];
 }
 ```
 
 In `index.ejs` in the root folder add the following inbetween the `<head></head>` tags
 
-  <base href="/">
+    <base href="/">
 
 ## Creating the Todo List
 
@@ -160,7 +160,7 @@ Inside `services/data.json` add the following or create your own.
 ]
 ```
 
-Now that we have our mock data update `todo-service.ts` with
+Now that we have our mock data update `todo-service.ts` with the following.
 
 ```ts
 import data from "./data.json";
@@ -186,7 +186,7 @@ export class TodoService {
 }
 ```
 
-In our `dashboard.ts` page inject `TodoService`
+In our `dashboard.ts` page inject `TodoService` into the Dashboard constructor.
 
 ```ts
 import { IRouteableComponent } from "@aurelia/router";
@@ -224,9 +224,11 @@ Run the following in terminal to add TailWind.css to our project.
 
 In your CSS folder edit the tailwind.css file and add the following.
 
-    @tailwind base;
-    @tailwind components;
-    @tailwind utilities;
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
 
 Run the following to create the tailwind configuration file.
 
@@ -252,9 +254,7 @@ Update `my-app.html`
 </div>
 ```
 
-If you are using VSCode, Install the [Tailwind Intellisense](https://tailwindcss.com/docs/intellisense){target=_blank}
-
-See [TailWindCSS](https://tailwindcss.com/docs) on what TailwindCSS is and how it works.
+If you are using VSCode, Install the [Tailwind Intellisense](https://tailwindcss.com/docs/intellisense){target=_blank}. This will automatically give you all available classes provided by TailwindCSS. See [TailWindCSS](https://tailwindcss.com/docs) on what TailwindCSS is and how it works.
 
 ## Creating Custom Components.
 
@@ -363,6 +363,14 @@ export class Item implements ICustomElementViewModel {
 
 Once updated and saved, try clicking on one of your todo items, You should be navigated to `localhost:9000/edit/0` - 0 being the id of the todo item.
 
+Please note that router is not required here. We can simply replace
+
+`<div click.delegate="editItem(item.id)">...</div>` with 
+
+`<a load="edit/${item.id}">...</a>`
+
+in `resources/components/item.html`
+
 ### Creating the Edit View Model
 
 pages/edit.ts
@@ -436,11 +444,12 @@ Update `pages/edit.html` with the following.
 
 ## Summary
 
-- Created our app using the `npx makes` command.
+- Created our app using the `npx makes` command. (Aurelia 2 CLI does not yet exist.)
 - Defined our project structure.
 - Created pages that can be routed to by defining static routes in `my-app.ts`
+- Added TailwindCSS for styling.
 - Created custom components that are registed and can be used globally without using import.
-- Data binded todos to custom component.
+- Data binded todos to a custom component that allows us to interact with each individual item.
 
 ## Final Notes
 
@@ -449,11 +458,5 @@ While we've created a very minimalistic todo list. Theres a few things that I wo
 - Add / Remove / Update items against a database.
 - Implement Sortable.js.
 
-A demo can be found here
-
-[Aurelia Todo List Example](https://aurelia-todo-list.netlify.app/dashboard)
-
-Source Code
-
-[Github Aurelia Todo List Example](https://github.com/PhilipTKC/tutorials/tree/main/todo-list)
+A live demonstration can be found [here](https://aurelia-todo-list.netlify.app/dashboard) and the source code can be found [here](https://github.com/PhilipTKC/tutorials/tree/main/todo-list).
 

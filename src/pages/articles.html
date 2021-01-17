@@ -1,5 +1,5 @@
 <div class="container m-auto">
-  <div class="max-w-2xl p-8 mx-auto">
+  <div class="max-w-4xl p-8 mx-auto">
     <h1 class="text-4xl font-black text-indigo-500">The Blog</h1>
 
     <div class="mt-4" if.bind="error">
@@ -12,16 +12,12 @@
           <post-content title.bind="post.title" summary.bind="post.summary"></post-content>
         </article>
       </a>
-      <post-footer
-        avatar.bind="post.avatar"
-        author.bind="post.author"
-        date.bind="post.date"
-        length.bind="post.length"
-        name.bind="post.name"
-      >
+      <post-footer avatar.bind="post.avatar" author.bind="post.author" date.bind="post.date" length.bind="post.length"
+        name.bind="post.name">
       </post-footer>
     </div>
 
-    <pagination if.bind="!error" current-page.bind="currentPage" pages.bind="pages" load-to.bind="location"></pagination>
+    <pagination if.bind="!error" current-page.bind="currentPage" pages.bind="pages" load-to.bind="location">
+    </pagination>
   </div>
 </div>
