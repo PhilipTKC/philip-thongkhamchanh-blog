@@ -27,7 +27,7 @@ Run the following command in terminal and pick the following options.
 
     npx makes aurelia
 
-1.  **Please name this new project** - -started
+1.  **Please name this new project** - getting-started
 2.  **Would you like to use the default setup or customize your choices?** - Custom Aurelia 2 App
 3.  **Which bundler would you like to use?** - Webpack
 4. **What transpiler would you like to use?** - TypeScript
