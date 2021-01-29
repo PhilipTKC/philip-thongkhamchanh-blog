@@ -48,7 +48,3 @@ Or change directory using the following.
 See the following for the project structure of your application.
 
 - [Aurelia2 Project Structure](https://codey.netlify.app/aurelia-2/start){target="_blank"}
-
-## Next Up
-
-Creating a [Todo List App](2021-01-16/aurelia-2-todo-list)
