@@ -1,9 +1,9 @@
+import { RouteNode } from "aurelia";
 import { IRouteViewModel, Params } from "@aurelia/router";
 
 import { Author as IContributer, IAuthorService } from "services";
 
 import nProgress from "nprogress";
-import { RouteNode } from "aurelia";
 
 export class Author implements IRouteViewModel {
   private static title = (instance: RouteNode) => `Author - ${instance.params.author}`;

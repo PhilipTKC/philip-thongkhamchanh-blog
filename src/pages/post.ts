@@ -1,9 +1,9 @@
-import { Author, AuthorService, PostService, Attributes } from "services";
 import { inject, IRouter, Params } from "aurelia";
+import { Author, AuthorService, PostService, Attributes } from "services";
 import { IRouteViewModel, RouteNode } from "@aurelia/router";
+
 import { ITraverse } from "components/traverse";
 
-import "../css/highlighter.css";
 import nProgress from "nprogress";
 
 interface IPost {
