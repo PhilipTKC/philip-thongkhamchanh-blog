@@ -1,15 +1,10 @@
 import { Author, AuthorService, PostService, Attributes } from "services";
-import { inject, IRouter } from "aurelia";
-import { IRouteableComponent } from "@aurelia/router";
+import { inject, IRouter, Params } from "aurelia";
+import { IRouteViewModel, RouteNode } from "@aurelia/router";
 import { ITraverse } from "components/traverse";
 
 import "../css/highlighter.css";
 import nProgress from "nprogress";
-
-type Parameters = {
-  date: string;
-  id: string;
-}
 
 interface IPost {
   attributes: Attributes;
@@ -17,8 +12,15 @@ interface IPost {
 }
 
 @inject(AuthorService, PostService)
-export class Post implements IRouteableComponent {
-  static title = (instance: Post): string => (instance.post ? instance.post.attributes.title : "Blog Post Not Found");
+export class Post implements IRouteViewModel {
+  static title = (node: RouteNode): string => {
+    const title = node.params.id.split("-").map((word) => {
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    });
+
+    return `Article - ${title.join(" ")}`;
+  
+  };
 
   private author: Author;
 
@@ -30,7 +32,7 @@ export class Post implements IRouteableComponent {
 
   constructor(private readonly authorService: AuthorService, private readonly posts: PostService, @IRouter private router: IRouter) { }
 
-  async load(parameters: Parameters): Promise<void> {
+  async load(parameters: Params): Promise<void> {
     const postData = await this.posts.retrieveData(parameters.id);
     const post = await this.posts.retrievePost(parameters.id);
 

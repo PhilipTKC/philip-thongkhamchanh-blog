@@ -1,9 +1,9 @@
 <div class="absolute top-0 right-0 z-50 p-2 text-xl lg:fixed">
     <div class="cursor-pointer ${isDark ? 'text-white' : ''}">
-        <span if.bind="isDark" click.delegate="removeDarkTheme()" class="text-yellow-200 hover:text-gray-500">
+        <span if.bind="isDark" click.delegate="removeDarkTheme()" class="text-yellow-200 hover:text-gray-300">
             <i class="fal fa-eclipse"></i>
         </span>
-        <span if.bind="!isDark" click.delegate="loadDarkTheme()" class="text-gray-500 hover:text-yellow-300">
+        <span if.bind="!isDark" click.delegate="loadDarkTheme()" class="text-gray-300 hover:text-yellow-300">
             <i class="fal fa-sun"></i>
         </span>
     </div>

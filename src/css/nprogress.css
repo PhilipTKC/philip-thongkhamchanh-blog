@@ -3,30 +3,27 @@
 */
 
 #nprogress {
-  pointer-events: none;
+  @apply pointer-events-none;
 }
 
 #nprogress .bar {
-  background: #000;
-
-  position: fixed;
-  z-index: 1031;
-  top: 0;
-  left: 0;
-
-  width: 100%;
-  height: 4px;
+  @apply bg-indigo-400;
+  @apply fixed;
+  @apply h-1;
+  @apply left-0;
+  @apply top-0;
+  @apply w-full;
+  @apply z-50;
 }
 
 #nprogress .peg {
-  display: block;
-  position: absolute;
-  right: 0px;
+  @apply block;
+  @apply absolute;
+  @apply right-0;
+  @apply h-full;
+  @apply opacity-100;
+  @apply shadow-md;
   width: 100px;
-  height: 100%;
-  box-shadow: 0 0 10px #000, 0 0 5px #000;
-  opacity: 1;
-
   -webkit-transform: rotate(3deg) translate(0px, -4px);
   -ms-transform: rotate(3deg) translate(0px, -4px);
   transform: rotate(3deg) translate(0px, -4px);

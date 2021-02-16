@@ -1,3 +1,5 @@
+import { DI } from "aurelia";
+
 export interface Author {
   authorDescription: string;
   author: string;
@@ -7,6 +9,11 @@ export interface Author {
   twitter: string;
   website: string;
 }
+
+export type IAuthorService = AuthorService;
+
+export const IAuthorService = DI.createInterface<IAuthorService>("IAuthorService", (x) => x.singleton(AuthorService));
+
 export class AuthorService {
   async retrieveAuthor(author: string): Promise<Author> {
     try {

@@ -1,3 +1,5 @@
+import { DI } from "aurelia";
+
 interface PostData {
   date: string;
   id: string;
@@ -18,6 +20,10 @@ export interface Attributes {
   date: Date;
   summary: string;
 }
+
+export type IPostService = PostService;
+
+export const IPostService = DI.createInterface<IPostService>("IPostService", (x) => x.singleton(PostService));
 
 export class PostService {
   async retrievePage(page: number): Promise<any> {

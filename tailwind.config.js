@@ -11,7 +11,7 @@ module.exports = {
       fontFamily: {
         sans: ["Varela", ...defaultTheme.fontFamily.sans],
       },
-    },
+    }
   },
   variants: {},
   plugins: [require('@tailwindcss/typography')],

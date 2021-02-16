@@ -1,25 +1,18 @@
-import { AuthorService, Author as IContributer } from "services";
-import { inject, ICustomElementViewModel } from "aurelia";
-import { IRouteableComponent } from "@aurelia/router";
+import { IRouteViewModel, Params } from "@aurelia/router";
+
+import { Author as IContributer, IAuthorService } from "services";
 
 import nProgress from "nprogress";
+import { RouteNode } from "aurelia";
 
-type Parameters = {
-  author: string;
-  page: string;
-};
+export class Author implements IRouteViewModel {
+  private static title = (instance: RouteNode) => `Author - ${instance.params.author}`;
 
-@inject(AuthorService)
-export class Author implements IRouteableComponent {
-  private static parameters: string[] = ["author", "page"];
-
-  private static title = (instance: Author) => `${instance.author !== undefined ? instance.author.author : "Not Found"} | Contributor`;
+  private currentPage = 1;
 
   private author: IContributer;
 
   private authorPosts: any;
-
-  private currentPage = 1;
 
   private error: boolean;
 
@@ -27,9 +20,9 @@ export class Author implements IRouteableComponent {
 
   private pages: number;
 
-  constructor(private readonly authorService: AuthorService) { }
+  constructor(@IAuthorService private readonly authorService: IAuthorService) { }
 
-  async load(parameters: Parameters): Promise<void> {
+  async load(parameters: Params): Promise<void> {
     this.currentPage = Number(parameters.page) || 1;
 
     const author = await this.authorService.retrieveAuthor(parameters.author);

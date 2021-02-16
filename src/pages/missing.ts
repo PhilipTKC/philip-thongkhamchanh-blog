@@ -1,19 +1,11 @@
-import { IRouteableComponent } from "@aurelia/router";
+import { IRouteViewModel, Params } from "@aurelia/router";
 
 import nProgress from "nprogress";
 
-type Parameters = {
-  id: string;
-};
-
-export class Missing implements IRouteableComponent {
-  private static parameters: string[] = ["id"];
-
-  private static title = (instance: Missing) => `404 | ${instance.missingComponent} not found`;
-
+export class Missing implements IRouteViewModel {
   private missingComponent: string;
 
-  load(parameters: Parameters): void {
+  load(parameters: Params): void {
     this.missingComponent = parameters.id;
   }
 

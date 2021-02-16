@@ -1,17 +1,33 @@
-import { IRouter } from "aurelia";
-import { navigationHook, titleHook } from "router-hooks";
-import { routes } from "routes";
+import { ICustomElementViewModel, IRouterEvents, route } from "aurelia";
 
-import "./css/output.css";
-import "./css/nprogress.css";
+import nProgress from 'nprogress';
 
-export class App {
-  private static routes = routes;
+const title = "Philip Thongkhamchanh Blog";
 
-  constructor(@IRouter private router: IRouter) { }
+@route({
+  routes: [
+    { path: ["", "articles"], component: "articles", viewport: "main", title: `${title} - Articles` } ,
+    { path: "articles/:page", component: "articles", viewport: "main", title: `${title} - Articles` } ,
+    { path: ":date/:id", component: "post", viewport: "main" } ,
+    { path: "author/:author",  component: "author", viewport: "main" } ,
+    { path: "author/:author/:page",  component: "author", viewport: "main" },
+  ]
+})
+export class App implements ICustomElementViewModel {
+  constructor(@IRouterEvents readonly routerEvents: IRouterEvents) {
+    this.subscribeToNavigationStartEvent();
+    this.subscribeToNavigationEndEvent();
+  }
 
-  attached(): void {
-    this.router.addHook(navigationHook.fn);
-    this.router.addHook(titleHook.fn, titleHook.options);
+  subscribeToNavigationStartEvent(): void {
+    this.routerEvents.subscribe("au:router:navigation-start", () => {
+      nProgress.start();
+    });
+  }
+
+  subscribeToNavigationEndEvent(): void {
+    this.routerEvents.subscribe("au:router:navigation-end", () => {
+      nProgress.done();
+    });
   }
 }

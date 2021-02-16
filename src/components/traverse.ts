@@ -1,6 +1,6 @@
 import { bindable, ICustomElementViewModel } from "aurelia";
 
-export type ITraverse = {
+export interface ITraverse {
   nextTitle?: string;
   nextId?: string;
   previousTitle?: string;
@@ -8,5 +8,5 @@ export type ITraverse = {
 };
 
 export class Traverse  implements ICustomElementViewModel {
-  @bindable traverse: ITraverse;
+  @bindable() traverse: ITraverse;
 }

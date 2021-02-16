@@ -1,15 +1,14 @@
 {
   "dependencies": {
-    "aurelia": "dev",
+    "aurelia": "^0.10.0-dev.202102151925",
     "dayjs": "^1.9.7",
     "nprogress": "^0.2.0",
     "tailwindcss": "^2.0.2"
   },
   "description": "Blogging Application built with Aurelia2.",
   "devDependencies": {
-    "@aurelia/testing": "dev",
-    "@aurelia/ts-jest": "dev",
-    "@aurelia/webpack-loader": "dev",
+    "@aurelia/testing": "0.10.0-dev.202102151925",
+    "@aurelia/webpack-loader": "0.10.0-dev.202102151925",
     "@tailwindcss/typography": "^0.3.1",
     "@types/jest": "^26.0.10",
     "@types/markdown-it": "^10.0.2",
@@ -24,12 +23,10 @@
     "cssnano": "^4.1.10",
     "eslint": "^7.7.0",
     "file-loader": "^6.0.0",
-    "frontmatter-markdown-loader": "^3.6.0",
-    "highlight.js": "^10.2.1",
-    "html-webpack-plugin": "^4.3.0",
+    "frontmatter-markdown-loader": "^3.6.2",
+    "highlight.js": "^10.6.0",
+    "html-webpack-plugin": "^5.1.0",
     "htmlhint": "^0.14.1",
-    "jest": "^26.4.0",
-    "jest-transform-stub": "^2.0.0",
     "markdown-it": "^11.0.1",
     "markdown-it-attrs": "^3.0.3",
     "markdown-it-bracketed-spans": "^1.0.1",
@@ -50,20 +47,6 @@
     "webpack-bundle-analyzer": "^4.3.0",
     "webpack-cli": "^4.2.0",
     "webpack-dev-server": "^3.11.0"
-  },
-  "jest": {
-    "collectCoverage": true,
-    "collectCoverageFrom": [
-      "src/**/*.ts",
-      "!src/**/*.d.ts"
-    ],
-    "setupFiles": [
-      "<rootDir>/test/setup.ts"
-    ],
-    "transform": {
-      "\\.(css|less|sass|scss|styl|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "jest-transform-stub",
-      "\\.(ts|html)$": "@aurelia/ts-jest"
-    }
   },
   "license": "UNLICENSED",
   "name": "philip-thongkhamchanh-blog",

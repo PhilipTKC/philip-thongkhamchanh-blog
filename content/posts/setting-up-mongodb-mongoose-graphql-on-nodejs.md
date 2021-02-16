@@ -9,25 +9,23 @@ published: true
 
 In this blog post we'll be going over on how to use MongoDB, Mongoose and GraphQL on NodeJS.
 
-# The database for modern applications
+### The database for modern applications
 
     MongoDB is a general purpose, document-based, distributed database built for modern application developers and for the cloud era.
 
 First and foremost you'll need to create a [mongoDB account](https://www.mongodb.com/). Best of all it's free to use, head over there and create your account.
 
-# Creating your Database
+### Creating your Database
 
--
+...
 
-# Create your first Admin User
+### Create your first Admin User
 
--
+...
 
-# Creating our Backend with NodeJS
+### Creating our Backend with NodeJS (Prerequisites)
 
-## Prerequisites 
-
-### Package.json
+Package.json
 
 ```json
 {
@@ -50,7 +48,7 @@ First and foremost you'll need to create a [mongoDB account](https://www.mongodb
 }
 ```
 
-### tsconfig.json
+tsconfig.json
 
 ```json
 {
@@ -67,15 +65,15 @@ First and foremost you'll need to create a [mongoDB account](https://www.mongodb
 }
 ```
 
-## Install Dependencies
+Install Dependencies
 
 ```
 npm install
 ```
 
-## Connecting to your Database
+### Connecting to your Database
 
-### index.ts
+index.ts
 
 ```ts
 import { ApolloServer } from 'apollo-server-express';
@@ -112,9 +110,9 @@ app.listen(5000).on("listening", () => {
 
 ```
 
-# GraphQL Schemas
+#### GraphQL Schemas
 
-## User Schema Example
+### User Schema Example
 
 ```ts
 import mongoose from 'mongoose'
@@ -176,7 +174,7 @@ const typeDefs = gql`
 export { typeDefs, resolvers };
 ```
 
-# Starting the Server
+#### Starting the Server
 
 Run in terminal
 
@@ -188,6 +186,6 @@ If successfully configured, You should see the message "Connected".
 
 Navigate to `http://localhost:5000/graphql` and you should be greeted with GraphQL Playground.
 
-# Next...
+### Next...
 
 In the next blog post we'll discover how to use Apollo Client to send queries and mutations.

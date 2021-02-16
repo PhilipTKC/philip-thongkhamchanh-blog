@@ -1,18 +1,12 @@
-import { AuthorService, PostService } from "services";
-import { inject } from "aurelia";
-import { IRouteableComponent } from "@aurelia/router";
+import { IRouteViewModel, Params } from "@aurelia/router";
+
+import { IAuthorService, IPostService } from "services";
 
 import configuration from "../../blog.config.json";
 import pagination from "../../content/pagination/pages.json";
 
 import nProgress from "nprogress";
-
-type Parameters = {
-  page: string;
-};
-
-@inject(AuthorService, PostService)
-export class Articles implements IRouteableComponent {
+export class Articles implements IRouteViewModel {
   private static parameters: string[] = ["page"];
 
   private blogPosts = [];
@@ -29,9 +23,9 @@ export class Articles implements IRouteableComponent {
 
   private readonly postPerPage = configuration.postsPerPage + 1;
 
-  constructor(private readonly author: AuthorService, private readonly posts: PostService) {}
+  constructor(@IAuthorService private readonly author: IAuthorService, @IPostService private readonly posts: IPostService) { }
 
-  async load(parameters: Parameters): Promise<void> {
+  async load(parameters: Params): Promise<void> {
     const page = Number(parameters.page) || 1;
     if (Object.keys(parameters).length > 0) {
       await this.retrievePage(page);

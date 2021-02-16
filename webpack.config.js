@@ -25,7 +25,7 @@ module.exports = function (env, { analyze }) {
   
   return {
     mode: production ? "production" : "development",
-    devtool: production ? "source-map" : "eval",
+    devtool: production ? "source-map" : "inline-source-map",
     entry: "./src/main.ts",
     cache: production ? false : { type: "memory" },
     output: {
