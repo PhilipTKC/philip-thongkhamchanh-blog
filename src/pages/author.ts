@@ -37,9 +37,4 @@ export class Author implements IRouteViewModel {
       this.error = true;
     }
   }
-
-  attached(): void {
-    window.scrollTo(0, 0);
-    nProgress.done();
-  }
 }

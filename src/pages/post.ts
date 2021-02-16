@@ -49,9 +49,4 @@ export class Post implements IRouteViewModel {
       this.postLength = postData.length;
     }
   }
-
-  attached(): void {
-    window.scrollTo(0, 0);
-    nProgress.done();
-  }
 }

@@ -36,11 +36,6 @@ export class Articles implements IRouteViewModel {
     }
   }
 
-  attached(): void {
-    window.scrollTo(0, 0);
-    nProgress.done();
-  }
-
   async retrievePage(page: number): Promise<void> {
     const blogPost = await this.posts.retrievePage(page);
 

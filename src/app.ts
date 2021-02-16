@@ -27,6 +27,7 @@ export class App implements ICustomElementViewModel {
 
   subscribeToNavigationEndEvent(): void {
     this.routerEvents.subscribe("au:router:navigation-end", () => {
+      window.scrollTo(0, 0);
       nProgress.done();
     });
   }
