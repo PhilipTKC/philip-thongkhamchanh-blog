@@ -10,10 +10,19 @@ h5,
 h6,
 p,
 th,
+span,
 .traverse {
   color: #dddddd !important;
 }
 
-#nprogress .bar {
-  @apply bg-indigo-500;
+li > strong {
+  color: #FFF !important;
+}
+
+a {
+  color: #6366F1 !important;
+}
+
+.ovr-text-black {
+  color: #000 !important;
 }
