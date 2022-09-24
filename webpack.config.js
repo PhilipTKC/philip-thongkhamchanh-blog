@@ -41,6 +41,8 @@ module.exports = function (env, { analyze }) {
       minimize: production ? true : false,
       minimizer: [
         new TerserPlugin({
+          test: /\.ts$/i,
+          exclude: /node_modules/,
           terserOptions: {
             compress: {
               ecma: 2017,
@@ -169,7 +171,8 @@ module.exports = function (env, { analyze }) {
       new CopyWebpackPlugin({
         patterns: [{ from: "static", to: path.resolve(__dirname, "dist") }],
       }),
-      production &&
+      ...when(
+        production,
         new CompressionPlugin({
           filename: "[path][base].br",
           algorithm: "brotliCompress",
@@ -180,8 +183,9 @@ module.exports = function (env, { analyze }) {
           threshold: 0,
           minRatio: 0.8,
           deleteOriginalAssets: false,
-        }),
-      analyze && new BundleAnalyzerPlugin(),
+        })
+      ),
+      ...when(analyze, new BundleAnalyzerPlugin()),
     ].filter((p) => p),
   };
 };
