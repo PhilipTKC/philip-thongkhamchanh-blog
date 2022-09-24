@@ -1,0 +1,15 @@
+<div class="flex items-center mt-8">
+  <div class="flex-shrink-0">
+    <img class="w-12 h-12 rounded-full" src="${avatar}" alt="Author Avatar" />
+  </div>
+  <div class="ml-3 text-sm">
+    <p class="font-medium text-indigo-500">
+      <a load="../author/${author}" class="hover:underline">${name}</a>
+    </p>
+    <div class="flex font-normal text-gray-500">
+      <time>${date | humanReadableDate}</time>
+      <span class="mx-1"> &middot; </span>
+      <span>${length | timeToRead}</span>
+    </div>
+  </div>
+</div>

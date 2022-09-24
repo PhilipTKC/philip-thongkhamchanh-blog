@@ -1,0 +1,38 @@
+<div class="container m-auto">
+  <div class="max-w-4xl p-8 mx-auto">
+    <h1 class="text-4xl font-black text-indigo-500">The Blog</h1>
+
+    <div class="mt-4" if.bind="error">
+      <h1 class="text-xl text-semibold">
+        The page you're looking for could not be found.
+      </h1>
+    </div>
+
+    <div class="py-4" repeat.for="post of blogPosts">
+      <a load="../${post.id}" class="focus:outline-none">
+        <article>
+          <post-content
+            title.bind="post.title"
+            summary.bind="post.summary"
+          ></post-content>
+        </article>
+      </a>
+      <post-footer
+        avatar.bind="post.avatar"
+        author.bind="post.author"
+        date.bind="post.date"
+        length.bind="post.length"
+        name.bind="post.name"
+      >
+      </post-footer>
+    </div>
+
+    <pagination
+      if.bind="!error"
+      current-page.bind="currentPage"
+      pages.bind="pages"
+      load-to.bind="location"
+    >
+    </pagination>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+@tailwind base;
+
+@tailwind components;
+
+html {
+  overflow-y: scroll;
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  margin-top: 0px;
+}
+
+.prose a {
+  @apply text-indigo-500;
+  @apply font-bold;
+}
+
+img.emoji {
+  display: inline;
+  height: 1em;
+  width: 1em;
+  margin: 0 .05em 0 .1em;
+}
+
+@tailwind utilities;

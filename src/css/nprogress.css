@@ -1,0 +1,30 @@
+/*
+** https://github.com/rstacruz/nprogress/blob/master/nprogress.css
+*/
+
+#nprogress {
+  @apply pointer-events-none;
+}
+
+#nprogress .bar {
+  @apply bg-indigo-400;
+  @apply fixed;
+  @apply h-1;
+  @apply left-0;
+  @apply top-0;
+  @apply w-full;
+  @apply z-50;
+}
+
+#nprogress .peg {
+  @apply block;
+  @apply absolute;
+  @apply right-0;
+  @apply h-full;
+  @apply opacity-100;
+  @apply shadow-md;
+  width: 100px;
+  -webkit-transform: rotate(3deg) translate(0px, -4px);
+  -ms-transform: rotate(3deg) translate(0px, -4px);
+  transform: rotate(3deg) translate(0px, -4px);
+}
