@@ -171,8 +171,8 @@ module.exports = function (env, { analyze }) {
       new CopyWebpackPlugin({
         patterns: [{ from: "static", to: path.resolve(__dirname, "dist") }],
       }),
-      ...when(
-        production,
+
+      production &&
         new CompressionPlugin({
           filename: "[path][base].br",
           algorithm: "brotliCompress",
@@ -183,9 +183,8 @@ module.exports = function (env, { analyze }) {
           threshold: 0,
           minRatio: 0.8,
           deleteOriginalAssets: false,
-        })
-      ),
-      ...when(analyze, new BundleAnalyzerPlugin()),
+        }),
+      analyze && new BundleAnalyzerPlugin(),
     ].filter((p) => p),
   };
 };
