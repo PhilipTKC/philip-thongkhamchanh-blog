@@ -142,6 +142,26 @@ And add the following line at the end of the file.
 
 `databaseConnection();`
 
+Your script should now look like this
+
+```ts
+import cors from "cors";
+import env from "dotenv";
+import express from "express";
+import http from "http";
+
+import { databaseConnection } from "./database-connection";
+
+env.config();
+
+const app = express();
+
+app.use(cors());
+app.use(express.json());
+
+databaseConnection();
+```
+
 Run the following command to start the server
 
 `npm run start:dev`
