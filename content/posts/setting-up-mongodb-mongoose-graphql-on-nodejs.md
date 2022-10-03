@@ -84,16 +84,30 @@ Your folder structure should now have the following.
 
 - node_modules
 - ./src
-- nodemon.json
 - package-lock.json
 - package.json
 - tsconfig.json
 
-We'll also need to create an additional file to store our environment variables.
+We'll also need to create an additional files to store our environment variables and configure nodemon
 
 ```shell
-touch .env
+touch .env nodemon.json
 ```
+
+Edit nodemon.json and add the following.
+
+```json
+{
+  "watch": ["src"],
+  "ext": ".ts,.js",
+  "ignore": [],
+  "exec": "ts-node ./src/index.ts"
+}
+```
+
+Inside the package.json file add the following script.
+
+`"start:dev": "nodemon"`
 
 ### Next…
 In the next blog post we'll configure the server.
