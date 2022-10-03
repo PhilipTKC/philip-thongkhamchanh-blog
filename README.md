@@ -72,6 +72,6 @@ Edit `blog.config.json` to change the amount of post shown on a single page. By 
 
 `cd builder`
 
-`npx ts-node src/index.ts`
+`npm run start`
 
 This will update data contained inside the `content` folder.
