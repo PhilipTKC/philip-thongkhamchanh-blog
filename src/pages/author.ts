@@ -1,11 +1,11 @@
-import { Parameters } from "@aurelia/router";
-import { IRouteViewModel, RouteNode } from "aurelia";
+import { Parameters, IRouteableComponent } from "@aurelia/router";
 
 import { Author as IContributer, IAuthorService } from "services";
 
-export class Author implements IRouteViewModel {
-  private static title = (instance: RouteNode) =>
-    `Author - ${instance.params.author}`;
+export class Author implements IRouteableComponent {
+  static title = (node): string => {
+    return `Author | ${node.author.name}`;
+  };
 
   private currentPage = 1;
 

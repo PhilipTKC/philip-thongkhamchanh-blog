@@ -1,6 +1,6 @@
 ---
 author: PhilipTKC
-title: Setting up MongoDB, Mongoose, GraphQL on NodeJS
+title: Setting up MongoDB, Mongoose, GraphQL on NodeJS Part 1
 date: 2021-01-16T00:00:00.001Z
 summary: In this blog post we'll be going over on how to use MongoDB, Mongoose and GraphQL on NodeJS.
 category: NodeJS
@@ -111,4 +111,6 @@ Inside the package.json file add the following script.
 
 ### Next…
 In the next blog post we'll configure the server.
+
+[Setting up MongoDB, Mongoose, GraphQL on NodeJS Part 2](/2022-10-3/setting-up-mongodb-mongoose-graphql-on-nodejs-part-2)
 

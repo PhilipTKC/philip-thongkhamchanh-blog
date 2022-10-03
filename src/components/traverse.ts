@@ -8,5 +8,5 @@ export interface ITraverse {
 };
 
 export class Traverse  implements ICustomElementViewModel {
-  @bindable() traverse: ITraverse;
+  @bindable traverse: ITraverse;
 }

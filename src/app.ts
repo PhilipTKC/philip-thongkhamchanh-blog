@@ -1,38 +1,39 @@
-import { ICustomElementViewModel, IRouterEvents, route } from "aurelia";
+import { IRouterEvents } from "aurelia";
+import { IRouteableComponent, IRoute } from "@aurelia/router";
 
 import nProgress from "nprogress";
 
-const title = "Philip Thongkhamchanh Blog";
-
-@route({
-  routes: [
+export class App implements IRouteableComponent {
+  static routes: IRoute[] = [
     {
-      path: ["", "articles", "articles/:page"],
-      component: "articles",
+      path: [ '', ':page' ],
+      component: () => import('./pages/articles'),
       viewport: "main",
-      title: `${title} - Articles`,
     },
-    { path: [":date/:id"], component: "post", viewport: "main" },
+    {
+      path: [ ":date/:id" ],
+      component: () => import('./pages/post'),
+      viewport: "main",
+    },
     {
       path: ["author/:author", "author/:author/:page"],
-      component: "author",
+      component: () => import('./pages/author'),
       viewport: "main",
     },
-  ],
-})
-export class App implements ICustomElementViewModel {
-  constructor(@IRouterEvents readonly routerEvents: IRouterEvents) {
+  ];
+
+  constructor (@IRouterEvents readonly routerEvents: IRouterEvents) {
     this.subscribeToNavigationStartEvent();
     this.subscribeToNavigationEndEvent();
   }
 
-  subscribeToNavigationStartEvent(): void {
+  subscribeToNavigationStartEvent (): void {
     this.routerEvents.subscribe("au:router:navigation-start", () => {
       nProgress.start();
     });
   }
 
-  subscribeToNavigationEndEvent(): void {
+  subscribeToNavigationEndEvent (): void {
     this.routerEvents.subscribe("au:router:navigation-end", () => {
       window.scrollTo(0, 0);
       nProgress.done();

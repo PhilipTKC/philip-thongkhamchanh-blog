@@ -1,6 +1,5 @@
-import { inject, IRouteViewModel, IRouter, RouteNode } from "aurelia";
-import { Parameters } from "@aurelia/router";
-import { Author, AuthorService, PostService, Attributes } from "services";
+import { Parameters, IRouteableComponent } from "@aurelia/router";
+import { Author, IAuthorService, Attributes, IPostService } from "services";
 
 import { ITraverse } from "components/traverse";
 
@@ -9,16 +8,9 @@ interface IPost {
   html: string;
 }
 
-@inject(AuthorService, PostService)
-export class Post implements IRouteViewModel {
-  static title = (node: RouteNode): string => {
-    const title = node.params.id.split("-").map((word) => {
-      return word.charAt(0).toUpperCase() + word.slice(1);
-    });
-
-    return `Article - ${title.join(" ")}`;
-  };
-
+export class Post implements IRouteableComponent {
+  static title = (node): string => node.post.attributes.title;
+    
   private author: Author;
 
   private post: IPost;
@@ -27,17 +19,17 @@ export class Post implements IRouteViewModel {
 
   private postLength: number;
 
-  constructor(
-    private readonly authorService: AuthorService,
-    private readonly posts: PostService,
-    @IRouter private router: IRouter
-  ) {}
+  constructor (
+    @IAuthorService private readonly authorService: IAuthorService,
+    @IPostService private readonly posts: IPostService
+  ) { }
 
-  async loading(parameters: Parameters): Promise<void> {
+  async loading (parameters: Parameters): Promise<void> {
     const postData = await this.posts.retrieveData(parameters.id as string);
     const post = await this.posts.retrievePost(parameters.id as string);
 
-    if (post && postData) {
+    if (post && postData)
+    {
       this.author = await this.authorService.retrieveAuthor(
         post.attributes.author
       );
