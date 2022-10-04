@@ -81,10 +81,13 @@ Select the `Connect your application` option and copy your connecting string to 
 Your `.env` should now look like the following.
 
 ```
-MONGODB_URL=mongodb+srv://<username>:<password>@<cluster_url>?retryWrites=true&w=majority
+MONGODB_URL=mongodb+srv://<username>:<password>@<cluster_url>/<database_name>?retryWrites=true&w=majority
+PORT=4000
 ```
 
-`MONGODB_URL` can be accessed with `process.env.MONGODB_URL`
+`MONGODB_URL` can be accessed with `process.env.MONGODB_URL`. Note that we haven't created our database yet. You will need to come back to this step and update `<database-name>` later.
+
+You can use any port number.
 
 ### Express
 
@@ -92,12 +95,11 @@ To create our Express Application add the following.
 
 ```ts
 const app = express();
-// Register the following middleware.
 app.use(cors());
 app.use(express.json());
 ```
 
-You'll notice that we don't have any middleware to determine who can access our data. This process is up to you on how you want to implement this. In this example we'll be using Firebase.
+You'll notice that we don't have any middleware to determine who can access our data. This process is up to you on how you want to implement this.
 
 ### Database Connection
 
@@ -112,24 +114,24 @@ And add the following.
 ```ts
 import mongoose from "mongoose";
 
-export async function databaseConnection() {
+export async function connectMongoose () {
   const databaseURL = process.env.MONGODB_URL;
 
-  try {
-    if (databaseURL) {
-      await mongoose.connect(databaseURL, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        useFindAndModify: false,
-        useCreateIndex: true,
-      });
-    } else {
+  try
+  {
+    if (databaseURL)
+    {
+      await mongoose.connect(databaseURL);
+    } else
+    {
       throw "No database connection string found";
     }
-  } catch (error) {
+  } catch (error)
+  {
     console.error(error);
   }
 }
+
 ```
 
 Import the following inside `index.ts`
@@ -166,7 +168,7 @@ Run the following command to start the server
 
 `npm run start:dev`
 
-While nothing will happen, If everything is going well there should be no errors.
+While nothing special will happen, If everything is going well there should be no errors (even if MONGODB_URL is not a valid URL)
 
 ### Next
 

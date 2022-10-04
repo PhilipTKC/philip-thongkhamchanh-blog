@@ -109,6 +109,29 @@ Inside the package.json file add the following script.
 
 `"start:dev": "nodemon"`
 
+Package.json should now look like the following
+
+```json
+{
+  "name": "backend-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "nodemon"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^18.8.0",
+    "nodemon": "^2.0.20",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.8.4"
+  }
+}
+```
+
 ### Next…
 In the next blog post we'll configure the server.
 

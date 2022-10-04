@@ -41,6 +41,8 @@ Blog post are ordered by `date` (ISO 8601). Simply increment T00:00:00.`000`Z po
 
 If `published` is false, the build script will automatically append an underscore to the filename and remove it when `published` is true.
 
+- [ ] TODO: Allow multiple category entries.
+
 ### Filename
 
 The filename should be hyphenated and not contain spaces for consistency.
