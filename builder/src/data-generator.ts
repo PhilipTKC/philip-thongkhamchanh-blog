@@ -207,6 +207,8 @@ function writeBlogPostData(fileDataArr: FileDataAttributes[]): void {
   if (fileDataArr.length === 0) {
     writePositionFile("entry");
     writePaginationFile(1, []);
+    // Move to a function
+    fs.writeFileSync(`${paginationDataPath}/pages.json`, JSON.stringify(Object.assign({}, { pages: 1 })));
     return;
   }
 
