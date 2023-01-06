@@ -205,7 +205,9 @@ function writeBlogPostData(fileDataArr: FileDataAttributes[]): void {
    ** Create an empty JSON file.
    */
   if (fileDataArr.length === 0) {
-    return writePositionFile("entry");
+    writePositionFile("entry");
+    writePaginationFile(1, []);
+    return;
   }
 
   let traverseArr: Traverse[] = [];
