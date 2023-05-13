@@ -1,28 +1,16 @@
 <div class="justify-between flex-1 mx-auto mt-12 mb-4 font-black traverse">
   <div class="px-4 py-2 m-2 text-center">
-    <a
-      class="cursor-pointer"
-      load="../${traverse.previousId}"
-      if.bind="traverse.previousId"
-    >
-      <div
-        class="inline-block px-2 py-1 mr-2 text-xs text-gray-600 rounded bg-blue-50"
-      >
+    <a class="cursor-pointer" load="../${traverse.previousId}" if.bind="traverse.previousId">
+      <div class="inline-block px-2 py-1 mr-2 text-xs text-gray-600 rounded bg-blue-50">
         <i class="fas fa-arrow-to-left"></i> NEWER
       </div>
       <span>${traverse.previousTitle}</span>
     </a>
   </div>
   <div class="px-4 py-2 m-2 text-center">
-    <a
-      class="cursor-pointer"
-      load="../${traverse.nextId}"
-      if.bind="traverse.nextId"
-    >
+    <a class="cursor-pointer" load="../${traverse.nextId}" if.bind="traverse.nextId">
       <span>${traverse.nextTitle}</span>
-      <div
-        class="inline-block px-1 py-1 ml-2 text-xs text-gray-600 rounded bg-yellow-50"
-      >
+      <div class="inline-block px-1 py-1 ml-2 text-xs text-gray-600 rounded bg-yellow-50">
         OLDER <i class="fas fa-arrow-to-right"></i>
       </div>
     </a>

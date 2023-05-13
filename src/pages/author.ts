@@ -1,10 +1,13 @@
 import { Parameters, IRouteableComponent } from "@aurelia/router";
 
+import { AnimationHooks } from "lifecycle-hooks/animation-hook";
 import { Author as IContributer, IAuthorService } from "services";
 
 export class Author implements IRouteableComponent {
-  static title = (node): string => {
-    return `Author | ${node.author.name}`;
+  static dependencies = [AnimationHooks];
+
+  static title = (viewModel: Author): string => {
+    return `Author | ${viewModel.author.name}`;
   };
 
   private currentPage = 1;

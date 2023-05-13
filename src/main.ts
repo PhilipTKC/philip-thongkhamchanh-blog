@@ -1,5 +1,5 @@
 import Aurelia from "aurelia";
-import { RouterConfiguration, RoutingInstruction, Navigation } from "@aurelia/router";
+import { RouterConfiguration } from "@aurelia/router";
 
 import { App } from "./app";
 import * as globalComponents from "./registry";

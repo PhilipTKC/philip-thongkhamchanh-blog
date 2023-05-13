@@ -2,42 +2,35 @@
 
 <div class="py-16">
   <div class="px-4">
-    <div class="lg:fixed mb-4">
-      <a
-        class="hover:bg-gray-100 px-2 py-1 text-gray-700 bg-gray-100 rounded"
-        load="../"
-      >
+    <div class="mb-4 lg:fixed">
+      <a class="px-2 py-1 text-gray-700 bg-gray-100 rounded hover:bg-gray-100" load="../">
         <i class="fas fa-angle-left"></i>
-        <span class="ovr-text-black ml-2 font-medium">Blog</span>
+        <span class="ml-2 font-medium ovr-text-black">Blog</span>
       </a>
     </div>
-    <div class="md:prose max-w-none mx-auto prose-sm prose" if.bind="post">
+    <div class="mx-auto prose-sm prose md:prose max-w-none" if.bind="post">
       <div>
         <div class="mb-2">
-          <span
-            class="inline-flex items-center px-2 py-1 text-sm font-semibold text-indigo-500 bg-indigo-100 rounded"
-          >
+          <span class="inline-flex items-center px-2 py-1 text-sm font-semibold text-indigo-500 bg-indigo-100 rounded">
             <i class="fas fa-hashtag ovr-text-black"></i>
-            <span class="ovr-text-black ml-2">${post.attributes.category}</span>
+            <span class="ml-2 ovr-text-black">${post.attributes.category}</span>
           </span>
         </div>
-        <div class="md:inline-flex text-sm">
+        <div class="text-sm md:inline-flex">
           <p>${post.attributes.date | humanReadableDate}</p>
-          <p class="md:inline-flex hidden mx-1">&middot;</p>
+          <p class="hidden mx-1 md:inline-flex">&middot;</p>
           <p>${postLength | timeToRead}</p>
-          <p class="md:inline-flex hidden mx-1">&middot;</p>
+          <p class="hidden mx-1 md:inline-flex">&middot;</p>
           <p>
             <span class="text-sm">By</span>
             <a load="../author/${author.author}">${author.name}</a>
           </p>
         </div>
         <article>
-          <h1
-            class="my-2 mb-6 font-black leading-8 tracking-tight text-gray-900"
-          >
+          <h1 class="my-2 mb-6 font-black leading-8 tracking-tight text-gray-900">
             ${post.attributes.title}
           </h1>
-          <p class="lg:text-md text-gray-600" innerhtml.bind="post.html"></p>
+          <p class="text-gray-600 lg:text-md" innerhtml.bind="post.html"></p>
         </article>
       </div>
     </div>

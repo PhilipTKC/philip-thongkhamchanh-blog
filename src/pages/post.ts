@@ -1,6 +1,7 @@
 import { Parameters, IRouteableComponent } from "@aurelia/router";
 import { Author, IAuthorService, Attributes, IPostService } from "services";
 
+import { AnimationHooks } from "lifecycle-hooks/animation-hook";
 import { ITraverse } from "components/traverse";
 
 interface IPost {
@@ -9,7 +10,9 @@ interface IPost {
 }
 
 export class Post implements IRouteableComponent {
-  static title = (node): string => node.post.attributes.title;
+  static dependencies = [AnimationHooks];
+
+  static title = (viewModel: Post): string => viewModel.post.attributes.title;
     
   private author: Author;
 

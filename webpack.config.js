@@ -4,7 +4,6 @@ const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const Dotenv = require("dotenv-webpack");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 
-const TerserPlugin = require("terser-webpack-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
 const markdownItConfig = require("./markdown.config");
 
@@ -39,23 +38,6 @@ module.exports = function (env, { analyze }) {
     },
     optimization: {
       minimize: production ? true : false,
-      minimizer: [
-        new TerserPlugin({
-          test: /\.ts$/i,
-          exclude: /node_modules/,
-          terserOptions: {
-            compress: {
-              ecma: 2017,
-              inline: 3,
-            },
-            module: false,
-            output: {
-              ecma: 2017,
-            },
-          },
-          parallel: true,
-        }),
-      ],
       runtimeChunk: true,
       splitChunks: {
         chunks: "all",
@@ -162,7 +144,7 @@ module.exports = function (env, { analyze }) {
       ],
     },
     plugins: [
-      new HtmlWebpackPlugin({ template: "index.ejs", favicon: "favicon.ico" }),
+      new HtmlWebpackPlugin({ template: "index.html", favicon: "favicon.ico" }),
       new Dotenv({
         path: `./.env${
           production ? "" : "." + (process.env.NODE_ENV || "development")

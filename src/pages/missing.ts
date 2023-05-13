@@ -1,7 +1,7 @@
-import { Parameters } from "@aurelia/router";
-import { IRouteViewModel } from "aurelia";
+import { IRouteableComponent, Parameters } from "@aurelia/router";
 
-export class Missing implements IRouteViewModel {
+export class Missing implements IRouteableComponent {
+  
   private missingComponent: string;
 
   loading(parameters: Parameters): void {

@@ -1,10 +1,7 @@
 <div class="relative py-16 overflow-hidden">
-  <div class="sm:px-6 lg:px-8 relative px-4">
-    <div class="lg:fixed mb-4">
-      <a
-        class="bg-gray-50 hover:bg-gray-100 px-2 py-1 text-gray-700 rounded"
-        load="../"
-      >
+  <div class="relative px-4 sm:px-6 lg:px-8">
+    <div class="mb-4 lg:fixed">
+      <a class="px-2 py-1 text-gray-700 rounded bg-gray-50 hover:bg-gray-100" load="../">
         <i class="fas fa-angle-left"></i>
         <span class="ml-2 font-medium">Blog</span>
       </a>
@@ -19,9 +16,7 @@
           <span class="text-2xl">${author.name}</span> <br />
           <span>
             ${author.twitter} &middot;
-            <a href="${author.website}" target="_blank" external
-              >${author.website}</a
-            >
+            <a href="${author.website}" target="_blank" external>${author.website}</a>
           </span>
         </p>
 
@@ -29,11 +24,7 @@
       </div>
       <div if.bind="!error">
         <author-posts author-posts.bind="authorPosts"></author-posts>
-        <pagination
-          current-page.bind="currentPage"
-          pages.bind="pages"
-          load-to.bind="location"
-        ></pagination>
+        <pagination current-page.bind="currentPage" pages.bind="pages" load-to.bind="location"></pagination>
       </div>
       <div class="font-medium text-center" if.bind="error">
         <p>The author could not be found.</p>

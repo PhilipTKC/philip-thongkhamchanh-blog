@@ -159,6 +159,7 @@ function hasRequiredAttributes(filePath: string) {
     const value = attributes[key];
 
     const hasKey = requiredKeys.includes(key);
+
     if (!hasKey || value === null) {
       isValid = false;
       return;

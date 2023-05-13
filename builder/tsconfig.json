@@ -4,9 +4,10 @@
     "module": "CommonJS",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "rootDir": "src",
     "skipLibCheck": true,
-    "target": "ES2017"
+    "target": "ES2017",
+    "outDir": "dist"
+
   },
   "exclude": [
     "node_modules"
