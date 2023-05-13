@@ -6,16 +6,16 @@ This project is bootstrapped by [aurelia/new](https://github.com/aurelia/new).
 
 ### Run Install
 
-    npm install
+    pnpm install
 
 ### Start dev web server
 
-    npm run watch:css
-    npm start
+    pnpm watch:css
+    pnpm start
 
 ### Build the app in production mode
 
-    npm run build
+    pnpm build
 
 ## Blog Post
 
